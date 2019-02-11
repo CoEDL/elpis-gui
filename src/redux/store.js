@@ -24,13 +24,14 @@ import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import dataBundle from './dataBundleReducer';
 import model from './modelReducer';
-// import transcription from './transcriptionReducer';
+import transcription from './transcriptionReducer';
 import steps from './stepReducer';
 import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({
     dataBundle,
     model,
+    transcription,
     steps
 });
 

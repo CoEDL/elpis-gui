@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Grid, Button, Header, Container, Segment, Placeholder } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import { newModel } from 'redux/actions';
 import Branding from 'components/Steps/Shared/Branding';
 
 class StepWelcome extends Component {
-
-
 
 	render() {
 		const { t } = this.props
@@ -75,17 +72,4 @@ class StepWelcome extends Component {
 }
 
 
-const mapDispatchToProps = dispatch => ({
-	newModel: () => {
-		dispatch(newModel());
-	}
-})
-
-export default withRouter(
-	connect(
-		null,
-		mapDispatchToProps
-	)(
-		translate('common')(StepWelcome)
-	)
-);
+export default translate('common')(StepWelcome);

@@ -3,15 +3,15 @@ import { Link, withRouter } from "react-router-dom";
 import { Checkbox, Grid, Header, Segment, Icon, List, Button, } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import { setFilesOverwrite, triggerApiWaiting } from 'redux/actions';
+import { replaceFiles, triggerApiWaiting } from 'redux/actions';
 import Branding from 'components/Steps/Shared/Branding';
 import Informer from 'components/Steps/Shared/Informer';
 import FileUpload from './FileUpload';
 
 class DataBundleAddFiles extends Component {
 
-    handleFilesOverwriteToggle = () => {
-        this.props.setFilesOverwrite()
+    handleFilesReplaceToggle = () => {
+        this.props.replaceFiles()
     }
 
     handleNextButton = () => {
@@ -21,7 +21,8 @@ class DataBundleAddFiles extends Component {
 
     render() {
 
-        const { t, audioFiles, transcriptionFiles, additionalTextFiles, filesOverwrite } = this.props;
+        const { t, audioFiles, transcriptionFiles, additionalTextFiles, replace } = this.props;
+
         const audioFileList = audioFiles.map(file => (
             <List.Item key={ file }>
                 <List.Content>{ file }</List.Content>
@@ -37,8 +38,6 @@ class DataBundleAddFiles extends Component {
                 <List.Content>{ file }</List.Content>
             </List.Item>
         ))
-
-        console.log('filesOverwrite', filesOverwrite)
 
         return (
             <div>
@@ -61,9 +60,9 @@ class DataBundleAddFiles extends Component {
                             <Segment>
                                 <Checkbox
                                     toggle
-                                    onChange={ this.handleFilesOverwriteToggle }
-                                    defaultChecked={ filesOverwrite }
-                                    label={ t('dataBundle.addFiles.replaceFilesLabel') }
+                                    onChange={ this.handleFilesReplaceToggle }
+                                    defaultChecked={ replace }
+                                    label={ t('dataBundle.addFiles.filesReplaceLabel') }
                                 />
                             </Segment>
 
@@ -115,16 +114,16 @@ class DataBundleAddFiles extends Component {
 
 const mapStateToProps = state => {
     return {
-        audioFiles: state.model.audioFiles,
-        transcriptionFiles: state.model.transcriptionFiles,
-        additionalTextFiles: state.model.additionalTextFiles,
-        filesOverwrite: state.model.filesOverwrite
+        audioFiles: state.dataBundle.audioFiles,
+        transcriptionFiles: state.dataBundle.transcriptionFiles,
+        additionalTextFiles: state.dataBundle.additionalTextFiles,
+        replace: state.dataBundle.replaceFiles
     }
 }
 
 const mapDispatchToProps = dispatch => ({
-    setFilesOverwrite: () => {
-        dispatch(setFilesOverwrite());
+    replaceFiles: () => {
+        dispatch(replaceFiles());
     },
     triggerApiWaiting: message => {
         dispatch(triggerApiWaiting(message));

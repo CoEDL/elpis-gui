@@ -3,16 +3,17 @@ import { Link } from 'react-router-dom';
 import { Grid, Header, Segment, Form, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import { updateModelName } from 'redux/actions';
+import { dataBundleName } from 'redux/actions';
 import Branding from 'components/Steps/Shared/Branding';
 import Informer from 'components/Steps/Shared/Informer';
 
 class DataBundleNew extends Component {
 
-    handleChangeModelName = (event) => {
+    handleName = (event) => {
         // TODO check for errors in the naming process
-        const { updateModelName } = this.props;
-        updateModelName({ name: event.target.value });
+
+        this.props.dataBundleName({ name: event.target.value });
+
         // TODO goto next step
         // TODO verify on the go if this is a valid name or not
         // TODO enable/disable depending on the above comment.
@@ -20,7 +21,7 @@ class DataBundleNew extends Component {
     }
 
     render() {
-        const { t, modelName } = this.props;
+        const { t, name } = this.props;
         return (
             <div>
                 <Branding />
@@ -39,7 +40,8 @@ class DataBundleNew extends Component {
                                 <Form.Field>
                                     <Form.Input
                                         placeholder={ t('dataBundle.new.namePlaceholder')}
-                                        onChange={ this.handleChangeModelName }
+                                        onChange={ this.handleName }
+                                        value={ name }
                                     >
                                     </Form.Input>
 
@@ -66,12 +68,12 @@ class DataBundleNew extends Component {
 
 const mapStateToProps = state => {
     return {
-        modelName: state.model.name
+        name: state.dataBundle.name
     }
 }
 const mapDispatchToProps = dispatch => ({
-    updateModelName: name => {
-        dispatch(updateModelName(name))
+    dataBundleName: name => {
+        dispatch(dataBundleName(name))
     }
 })
 export default connect(mapStateToProps, mapDispatchToProps)(translate('common')(DataBundleNew));

@@ -22,7 +22,7 @@
 			"title": "Add data",
 			"description": "Some description and information about file formats, naming requirements etc.",
 			"filesHeader": "Transcription and Audio Files",
-			"replaceFilesLabel": "Replace files?",
+			"filesReplaceLabel": "Replace files?",
 			"settingsHeader": "Settings",
 			"settingsDescription": "Some info about the settings",
 			"nextButton": "Next: process this data",

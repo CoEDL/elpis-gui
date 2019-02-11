@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Grid, Header, Segment, Form, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import { updateModelName } from 'redux/actions';
+import { modelName } from 'redux/actions';
 import Branding from 'components/Steps/Shared/Branding';
 import Informer from 'components/Steps/Shared/Informer';
 
@@ -11,8 +11,9 @@ class ModelNew extends Component {
 
     handleChangeModelName = (event) => {
         // TODO check for errors in the naming process
-        const { updateModelName } = this.props;
-        updateModelName({ name: event.target.value });
+
+        this.props.modelName({ name: event.target.value });
+
         // TODO goto next step
         // TODO verify on the go if this is a valid name or not
         // TODO enable/disable depending on the above comment.
@@ -20,7 +21,7 @@ class ModelNew extends Component {
     }
 
     render() {
-        const { t, modelName } = this.props;
+        const { t, name } = this.props;
         return (
             <div>
                 <Branding />
@@ -40,7 +41,7 @@ class ModelNew extends Component {
                                     <input
                                         placeholder={ t('model.new.namePlaceholder') }
                                         onChange={ this.handleChangeModelName }
-                                        value={ modelName }
+                                        value={ name }
                                     />
                                     {/* {modelList.indexOf(modelName) > -1 ? (<Label basic color='red' pointing>
                                         Model name already exists
@@ -69,12 +70,12 @@ class ModelNew extends Component {
 
 const mapStateToProps = state => {
     return {
-        modelName: state.model.name
+        name: state.model.name
     }
 }
 const mapDispatchToProps = dispatch => ({
-    updateModelName: name => {
-        dispatch(updateModelName(name))
+    modelName: name => {
+        dispatch(modelName(name))
     }
 })
 export default connect(mapStateToProps, mapDispatchToProps)(translate('common')(ModelNew));

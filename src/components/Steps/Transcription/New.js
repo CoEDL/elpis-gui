@@ -6,7 +6,7 @@ import { translate } from 'react-i18next';
 import classNames from "classnames";
 import Dropzone from "react-dropzone";
 import { fromEvent } from "file-selector";
-import { updateNewTranscriptionFile } from 'redux/actions';
+import { transcriptionNew } from 'redux/actions';
 import Branding from 'components/Steps/Shared/Branding';
 import Informer from 'components/Steps/Shared/Informer';
 
@@ -16,7 +16,7 @@ class NewTranscription extends Component {
         console.log("files dropped:", acceptedFiles);
         var formData = new FormData();
         formData.append('file', acceptedFiles[0]);
-        this.props.updateNewTranscriptionFile(formData);
+        this.props.transcriptionNew(formData);
     }
 
     render() {
@@ -110,8 +110,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    updateNewTranscriptionFile: postData => {
-        dispatch(updateNewTranscriptionFile(postData));
+    transcriptionNew: postData => {
+        dispatch(transcriptionNew(postData));
     }
 })
 

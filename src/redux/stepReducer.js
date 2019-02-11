@@ -12,8 +12,8 @@ const initialStepModelState = {
             substeps: [
                 { done: false, doing: false, enabled: false, title: "Data bundles", path: "/data-bundles", type:"solo" },
                 { done: false, doing: false, enabled: false, title: "New data bundle", path: "/data-bundle/new" },
-                { done: false, doing: false, enabled: false, title: "Add data", path: "/data-bundle/add-files" },
-                { done: false, doing: false, enabled: false, title: "Data preparation", path: "/data-bundle/preparation" }
+                { done: false, doing: false, enabled: false, title: "Add data", path: "/data-bundle/files" },
+                { done: false, doing: false, enabled: false, title: "Data preparation", path: "/data-bundle/clean" }
 
             ]
         },
@@ -24,7 +24,7 @@ const initialStepModelState = {
             substeps: [
                 { done: false, doing: false, enabled: false, title: "Models", path: "/models", type:"solo" },
                 { done: false, doing: false, enabled: false, title: "New model", path: "/model/new" },
-                { done: false, doing: false, enabled: false, title: "Pronunciation dictionary", path: "/model/pronunciation-dictionary" },
+                { done: false, doing: false, enabled: false, title: "Pronunciation dictionary", path: "/model/pronunciation" },
                 { done: false, doing: false, enabled: false, title: "Lexicon", path: "/model/lexicon" },
                 { done: false, doing: false, enabled: false, title: "Settings", path: "/model/settings" },
                 { done: false, doing: false, enabled: false, title: "Training", path: "/model/training" },

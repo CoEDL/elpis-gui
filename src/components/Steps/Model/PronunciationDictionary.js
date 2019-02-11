@@ -6,7 +6,7 @@ import { translate } from 'react-i18next';
 import classNames from "classnames";
 import Dropzone from "react-dropzone";
 import { fromEvent } from "file-selector";
-import { updateModelPronunciationFile } from 'redux/actions';
+import { modelPronunciation } from 'redux/actions';
 import Branding from 'components/Steps/Shared/Branding';
 import Informer from 'components/Steps/Shared/Informer';
 
@@ -16,7 +16,7 @@ class ModelPronunciationDictionary extends Component {
         console.log("files dropped:", acceptedFiles);
         var formData = new FormData();
         formData.append('file', acceptedFiles[0]);
-        this.props.updateModelPronunciationFile(formData);
+        this.props.modelPronunciation(formData);
     }
 
     render() {
@@ -91,8 +91,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    updateModelPronunciationFile: postData => {
-        dispatch(updateModelPronunciationFile(postData));
+    modelPronunciation: postData => {
+        dispatch(modelPronunciation(postData));
     }
 })
 

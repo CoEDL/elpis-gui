@@ -3,31 +3,31 @@ import { Link } from "react-router-dom";
 import { Divider, Grid, Header, Segment, Form, Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import { updateModelSettings } from 'redux/actions';
+import { modelSettings } from 'redux/actions';
 import Branding from 'components/Steps/Shared/Branding';
 import Informer from 'components/Steps/Shared/Informer';
 
 class ModelSettings extends Component {
     handleAudioSetting = (e) => {
-        const { settings, updateModelSettings } = this.props;
+        const { settings, modelSettings } = this.props;
         const newSettings = {...settings, frequency:e.target.value}
         console.log(newSettings)
-        updateModelSettings({settings:newSettings})
+        modelSettings({settings:newSettings})
     }
     handleMfccSetting = (e) => {
-        const { settings, updateModelSettings } = this.props;
+        const { settings, modelSettings } = this.props;
         const newSettings = {...settings, mfcc:e.target.value}
-        updateModelSettings({settings:newSettings})
+        modelSettings({settings:newSettings})
     }
     handleNgramSetting = (e) => {
-        const { settings, updateModelSettings } = this.props;
+        const { settings, modelSettings } = this.props;
         const newSettings = {...settings, ngram:e.target.value}
-        updateModelSettings({settings:newSettings})
+        modelSettings({settings:newSettings})
     }
     handleBeamSetting = (e) => {
-        const { settings, updateModelSettings } = this.props;
+        const { settings, modelSettings } = this.props;
         const newSettings = {...settings, beam:e.target.value}
-        updateModelSettings({settings:newSettings})
+        modelSettings({settings:newSettings})
     }
     render() {
         const { t, settings } = this.props;
@@ -94,8 +94,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    updateModelSettings: postData => {
-        dispatch(updateModelSettings(postData));
+    modelSettings: postData => {
+        dispatch(modelSettings(postData));
     }
 })
 
