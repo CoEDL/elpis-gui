@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from "react-router-dom";
 import { Grid, Button, Header, Container, Segment, Placeholder } from 'semantic-ui-react';
-import StepBranding from './StepBranding';
-import { translate } from 'react-i18next';
-import { newModel } from '../../redux/actions';
 import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
+import { newModel } from 'redux/actions';
+import Branding from 'components/Steps/Shared/Branding';
 
 class StepWelcome extends Component {
 
-	handleNewModel = () => {
-		this.props.newModel();
-		this.props.history.push('/naming')
-	}
+
 
 	render() {
 		const { t } = this.props
@@ -21,17 +18,17 @@ class StepWelcome extends Component {
 			<Grid>
 				<Grid.Row centered>
 					<Grid.Column >
-						<StepBranding />
+						<Branding />
 					</Grid.Column>
 				</Grid.Row>
 
 				<Grid.Row>
 					<Grid.Column>
 						<Segment>
-							<Button onClick={ this.handleNewModel }>
+							<Button as={ Link } to="/model/new">
 								{ t('welcome.newModelButton') }
 							</Button>
-							<Button as={ Link } to="/new-transcription">
+							<Button as={ Link } to="/transcription/new">
 								{ t('welcome.newTranscriptionButton') }
 							</Button>
 						</Segment>

@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { List, Accordion } from 'semantic-ui-react';
-import Indicator from '../components/Indicator';
 import { connect } from 'react-redux'
-import { setCurrentStep } from '../redux/actions'
 import classNames from 'classnames'
-import './StepInformer.css'
-
-/**
- * Steps navigation menu
- */
+import { setCurrentStep } from 'redux/actions'
+import Indicator from 'components/Steps/Shared/Indicator';
+import './Informer.css'
 
 
 class StepInformer extends Component {
@@ -24,6 +20,7 @@ class StepInformer extends Component {
         // identify which step is currently being done
         const { match, setCurrentStep } = this.props
         const urlParams = match.url.split('/')
+        console.log(urlParams)
         setCurrentStep(urlParams)
     }
 

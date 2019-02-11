@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from "react-router-dom";
 import { Checkbox, Grid, Header, Segment, Icon, List, Button, } from 'semantic-ui-react';
-import StepBranding from './StepBranding';
-import StepInformer from '../StepInformer';
-import FileUpload from '../FileuploadComponents/FileUpload';
-import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { setFilesOverwrite } from '../../redux/actions';
-import { triggerApiWaiting } from '../../redux/actions';
+import { translate } from 'react-i18next';
+import { setFilesOverwrite, triggerApiWaiting } from 'redux/actions';
+import Branding from 'components/Steps/Shared/Branding';
+import Informer from 'components/Steps/Shared/Informer';
+import FileUpload from './FileUpload';
 
-class StepAddData extends Component {
+class DataBundleAddFiles extends Component {
 
     handleFilesOverwriteToggle = () => {
         this.props.setFilesOverwrite()
@@ -17,7 +16,7 @@ class StepAddData extends Component {
 
     handleNextButton = () => {
         this.props.triggerApiWaiting('data preparation')
-        this.props.history.push('/data-preparation')
+        this.props.history.push('/data-bundle/preparation')
     }
 
     render() {
@@ -43,29 +42,29 @@ class StepAddData extends Component {
 
         return (
             <div>
-                <StepBranding />
+                <Branding />
                 <Segment>
                     <Grid centered>
-                        <Grid.Column width={ 6 }>
-                            <StepInformer />
+                        <Grid.Column width={ 4 }>
+                            <Informer />
                         </Grid.Column>
 
-                        <Grid.Column width={ 10 }>
+                        <Grid.Column width={ 12 }>
                             <Header as='h1'>
-                                { t('addData.title') }
+                                { t('dataBundle.addFiles.title') }
                             </Header>
 
                             <p>
-                                { t('addData.description') }
+                                { t('dataBundle.addFiles.description') }
                             </p>
 
                             <Segment>
                                 <Checkbox
                                     toggle
-                                    onChange={this.handleFilesOverwriteToggle}
-                                    defaultChecked={filesOverwrite}
-                                    label={t('addData.filesOverwriteLabel') }
-                                    />
+                                    onChange={ this.handleFilesOverwriteToggle }
+                                    defaultChecked={ filesOverwrite }
+                                    label={ t('dataBundle.addFiles.replaceFilesLabel') }
+                                />
                             </Segment>
 
                             <Segment>
@@ -73,7 +72,7 @@ class StepAddData extends Component {
                             </Segment>
 
                             <Header as='h1'>
-                                { t('addData.filesHeader') }
+                                { t('dataBundle.addFiles.filesHeader') }
                             </Header>
 
                             <Grid columns={ 3 }>
@@ -97,12 +96,12 @@ class StepAddData extends Component {
                             </Grid>
 
                             <Grid container>
-                                <Button type='submit' onClick={this.handleNextButton}>
-                                    { t('addData.nextButton') }
+                                <Button type='submit' onClick={ this.handleNextButton }>
+                                    { t('dataBundle.addFiles.nextButton') }
                                 </Button>
-                                <Button type='submit' as={ Link } to="/data-preparation-error" icon>
+                                <Button type='submit' as={ Link } to="/data-bundle/preparation/error" icon>
                                     <Icon name='warning sign' />
-                                    { t('addData.nextButtonError') }
+                                    { t('dataBundle.addFiles.nextButtonError') }
                                 </Button>
                             </Grid>
                         </Grid.Column>
@@ -137,6 +136,6 @@ export default withRouter(
         mapStateToProps,
         mapDispatchToProps
     )(
-        translate('common')(StepAddData)
+        translate('common')(DataBundleAddFiles)
     )
 );

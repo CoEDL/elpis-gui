@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { Divider, Grid, Header, Segment, Form, Button } from 'semantic-ui-react';
-import StepBranding from './StepBranding';
-import StepInformer from '../StepInformer';
-import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-import { updateModelSettings } from '../../redux/actions';
+import { translate } from 'react-i18next';
+import { updateModelSettings } from 'redux/actions';
+import Branding from 'components/Steps/Shared/Branding';
+import Informer from 'components/Steps/Shared/Informer';
 
-class StepModelSettings extends Component {
+class ModelSettings extends Component {
     handleAudioSetting = (e) => {
         const { settings, updateModelSettings } = this.props;
         const newSettings = {...settings, frequency:e.target.value}
@@ -33,37 +33,41 @@ class StepModelSettings extends Component {
         const { t, settings } = this.props;
         return (
             <div>
-                <StepBranding />
+                <Branding />
                 <Segment>
                     <Grid centered>
-                        <Grid.Column width={ 6 }>
-                            <StepInformer />
+                        <Grid.Column width={ 4 }>
+                            <Informer />
                         </Grid.Column>
 
-                        <Grid.Column width={ 10 }>
+                        <Grid.Column width={ 12 }>
 
                             <Header as='h1' text='true'>
-                                { t('modelSettings.title') }
+                                { t('model.settings.title') }
                             </Header>
 
                             <Form>
                                 <Form.Field>
-                                    <label>{ t('modelSettings.audioLabel') }</label>
+                                    <label>{ t('model.settings.nGramLabel') }</label>
+                                    <input type='text' placeholder={ settings.ngram } onChange={ this.handleNgramSetting } />
+                                </Form.Field>
+
+                                <Header as='h2' text='true'>
+                                    { t('model.settings.advancedHeader') }
+                                </Header>
+
+                                <Form.Field>
+                                    <label>{ t('model.settings.audioLabel') }</label>
                                     <input type='text' placeholder={ settings.frequency } onChange={ this.handleAudioSetting } />
                                 </Form.Field>
 
                                 <Form.Field>
-                                    <label>{ t('modelSettings.mfccLabel') }</label>
+                                    <label>{ t('model.settings.mfccLabel') }</label>
                                     <input type='text' placeholder={ settings.mfcc } onChange={ this.handleMfccSetting } />
                                 </Form.Field>
 
                                 <Form.Field>
-                                    <label>{ t('modelSettings.nGramLabel') }</label>
-                                    <input type='text' placeholder={ settings.ngram } onChange={ this.handleNgramSetting } />
-                                </Form.Field>
-
-                                <Form.Field>
-                                    <label>{ t('modelSettings.beamLabel') }</label>
+                                    <label>{ t('model.settings.beamLabel') }</label>
                                     <input type='text' placeholder={ settings.beam } onChange={ this.handleBeamSetting } />
                                 </Form.Field>
 
@@ -71,8 +75,8 @@ class StepModelSettings extends Component {
 
                             <Divider />
 
-                            <Button as={ Link } to="/model-training">
-                                { t('modelSettings.nextButton') }
+                            <Button as={ Link } to="/model/training">
+                                { t('model.settings.nextButton') }
                             </Button>
 
                         </Grid.Column>
@@ -95,4 +99,4 @@ const mapDispatchToProps = dispatch => ({
     }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(translate('common')(StepModelSettings));
+export default connect(mapStateToProps, mapDispatchToProps)(translate('common')(ModelSettings));

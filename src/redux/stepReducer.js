@@ -6,36 +6,38 @@ const initialStepModelState = {
     currentStep: [0, 0],
     steps: [
         {
-            title: "Step 1 Data Preparation",
-            path: "/naming",
-            icon: "wrench",
+            title: "Step 1 Data Bundles",
+            path: "/data-bundles",
             done: false, doing: false, enabled: true,
             substeps: [
-                { done: false, doing: false, enabled: false, title: "Name the model", path: "/naming" },
-                { done: false, doing: false, enabled: false, title: "Add data", path: "/add-data" },
-                { done: false, doing: false, enabled: false, title: "Data preparation", path: "/data-preparation" },
-                { done: false, doing: false, enabled: false, title: "Pronunciation dictionary", path: "/build-pronunciation-dictionary" },
+                { done: false, doing: false, enabled: false, title: "Data bundles", path: "/data-bundles", type:"solo" },
+                { done: false, doing: false, enabled: false, title: "New data bundle", path: "/data-bundle/new" },
+                { done: false, doing: false, enabled: false, title: "Add data", path: "/data-bundle/add-files" },
+                { done: false, doing: false, enabled: false, title: "Data preparation", path: "/data-bundle/preparation" }
+
             ]
         },
         {
-            title: "Step 2 Model Building",
-            path: "/model-settings",
-            icon: "lemon",
+            title: "Step 2 Models",
+            path: "/models",
             done: false, doing: false, enabled: false,
             substeps: [
-                { done: false, doing: false, enabled: false, title: "Model settings", path: "/model-settings" },
-                { done: false, doing: false, enabled: false, title: "Model Training", path: "/model-training" },
-                { done: false, doing: false, enabled: false, title: "Trained Model Success", path: "/training-success" },
+                { done: false, doing: false, enabled: false, title: "Models", path: "/models", type:"solo" },
+                { done: false, doing: false, enabled: false, title: "New model", path: "/model/new" },
+                { done: false, doing: false, enabled: false, title: "Pronunciation dictionary", path: "/model/pronunciation-dictionary" },
+                { done: false, doing: false, enabled: false, title: "Lexicon", path: "/model/lexicon" },
+                { done: false, doing: false, enabled: false, title: "Settings", path: "/model/settings" },
+                { done: false, doing: false, enabled: false, title: "Training", path: "/model/training" },
+                { done: false, doing: false, enabled: false, title: "Results", path: "/model/training/results" },
             ]
         },
         {
-            title: "Step 3 New transcription",
-            path: "/new-transcription",
-            icon: "microphone",
+            title: "Step 3 New transcriptions",
+            path: "/transcription/new",
             done: false, doing: false, enabled: false,
             substeps: [
-                { done: false, doing: false, enabled: false, title: "Choose model", path: "/new-transcription" },
-                { done: false, doing: false, enabled: false, title: "Transcribe", path: "/transcription-results" },
+                { done: false, doing: false, enabled: false, title: "Choose file and model", path: "/transcription/new" },
+                { done: false, doing: false, enabled: false, title: "Results", path: "/transcription/results" },
             ]
         }
     ]

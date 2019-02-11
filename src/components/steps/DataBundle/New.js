@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Header, Segment, Form, Button } from 'semantic-ui-react';
-import StepBranding from './StepBranding';
-import StepInformer from '../StepInformer';
-import { updateModelName } from '../../redux/actions';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
+import { updateModelName } from 'redux/actions';
+import Branding from 'components/Steps/Shared/Branding';
+import Informer from 'components/Steps/Shared/Informer';
 
-class StepNaming extends Component {
+class DataBundleNew extends Component {
 
     handleChangeModelName = (event) => {
         // TODO check for errors in the naming process
@@ -23,41 +23,38 @@ class StepNaming extends Component {
         const { t, modelName } = this.props;
         return (
             <div>
-                <StepBranding />
+                <Branding />
                 <Segment>
                     <Grid centered>
-                        <Grid.Column width={ 6 }>
-                            <StepInformer />
+                        <Grid.Column width={ 4 }>
+                            <Informer />
                         </Grid.Column>
 
-                        <Grid.Column width={ 10 }>
+                        <Grid.Column width={ 12 }>
                             <Header as='h1' text="true">
-                                { t('naming.title') }
+                                { t('dataBundle.new.title') }
                             </Header>
 
                             <Form>
                                 <Form.Field>
-                                    <input
-                                        placeholder='Project Name'
+                                    <Form.Input
+                                        placeholder={ t('dataBundle.new.namePlaceholder')}
                                         onChange={ this.handleChangeModelName }
-                                        value={ modelName }
-                                    />
+                                    >
+                                    </Form.Input>
+
                                     {/* {modelList.indexOf(modelName) > -1 ? (<Label basic color='red' pointing>
-                                        Model name already exists
+                                        name already exists
                                     </Label>):(<div/>)} */}
                                 </Form.Field>
 
-                                <Button type='submit' as={ Link } to="/add-data" >
-                                    { t('naming.next-button') }
+                                <Button type='submit' as={ Link } to="/data-bundle/add-files" >
+                                    { t('dataBundle.new.nextButton') }
                                 </Button>
 
                                 {/* <Button type='submit' as={Link} to="/add-data" disabled={modelList.indexOf(modelName) > -1 || modelName===""}>GO</Button> */ }
 
                             </Form>
-
-                            {/* <Divider /> */ }
-
-                            {/* {modelList} */ }
 
                         </Grid.Column>
                     </Grid>
@@ -77,4 +74,4 @@ const mapDispatchToProps = dispatch => ({
         dispatch(updateModelName(name))
     }
 })
-export default connect(mapStateToProps, mapDispatchToProps)(translate('common')(StepNaming));
+export default connect(mapStateToProps, mapDispatchToProps)(translate('common')(DataBundleNew));

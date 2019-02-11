@@ -1,4 +1,4 @@
-const initialModelState = {
+const initState = {
     name: "",
     audioFiles: [],
     transcriptionFiles: [],
@@ -21,7 +21,7 @@ function getFileExtension(filename) {
     return filename
 }
 
-const model = (state = initialModelState, action) => {
+const model = (state = initState, action) => {
     switch (action.type) {
 
         case 'TRIGGER_API_WAITING':
