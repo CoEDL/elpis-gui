@@ -35,9 +35,11 @@ class ModelTrainingResults extends Component {
 
                             <Table celled padded sortable>
                                 <Table.Header>
-                                    <Table.HeaderCell>sort by Date</Table.HeaderCell>
-                                    <Table.HeaderCell>Name</Table.HeaderCell>
-                                    <Table.HeaderCell>WER</Table.HeaderCell>
+                                    <Table.Row>
+                                        <Table.HeaderCell>sort by Date</Table.HeaderCell>
+                                        <Table.HeaderCell>Name</Table.HeaderCell>
+                                        <Table.HeaderCell>WER</Table.HeaderCell>
+                                    </Table.Row>
                                 </Table.Header>
                                 <Table.Body>
                                     <Table.Row>
