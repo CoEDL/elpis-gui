@@ -2,7 +2,10 @@
 	"welcome": {
 		"title": "Elpis",
 		"intro": "This is fun. {{passInSomething}}",
-		"newModelButton": "Build New Model",
+		"newDataBundleButton": "Build a new Data Bundle",
+		"newModelButton": "Build a new Model",
+		"dataBundlesButton": "Choose an existing Data Bundle",
+		"modelsButton": "Choose a Model",
 		"newTranscriptionButton": "New Transcription",
 		"stepPlaceholder": "step descriptions"
 	},
@@ -50,7 +53,7 @@
 		"new": {
 			"title": "New Model",
 			"namePlaceholder": "Name",
-			"next-button": "Go"
+			"nextButton": "Go"
 		},
 
 		"pronDict": {
@@ -102,7 +105,7 @@
 	},
 	"transcription": {
 		"new": {
-			"title": "Transcribe some audio with an exisiting model",
+			"title": "Transcribe some audio",
 			"dropFilesHint": "Drop audio file here",
 			"dropFilesHintDragActive": "Here here..",
 			"addAudioButton": "Add Audio",

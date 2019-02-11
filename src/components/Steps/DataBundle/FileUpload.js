@@ -3,7 +3,7 @@ import classNames from "classnames";
 import Dropzone from "react-dropzone";
 import { fromEvent } from "file-selector";
 import { translate } from 'react-i18next';
-import { updateModelTranscriptionFiles } from 'redux/actions';
+import { updateDataBundleFiles } from 'redux/actions';
 import { connect } from 'react-redux';
 
 class FileUpload extends Component {
@@ -20,7 +20,7 @@ class FileUpload extends Component {
             console.log(file)
             formData.append('file', file);
         })
-        this.props.updateModelTranscriptionFiles(formData);
+        this.props.updateDataBundleFiles(formData);
     };
 
     render() {
@@ -61,8 +61,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-    updateModelTranscriptionFiles: postData => {
-        dispatch(updateModelTranscriptionFiles(postData));
+    updateDataBundleFiles: postData => {
+        dispatch(updateDataBundleFiles(postData));
     }
 })
 

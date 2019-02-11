@@ -32,13 +32,13 @@ class ModelNew extends Component {
 
                         <Grid.Column width={ 12 }>
                             <Header as='h1' text="true">
-                                { t('naming.title') }
+                                { t('model.new.title') }
                             </Header>
 
                             <Form>
                                 <Form.Field>
                                     <input
-                                        placeholder='Project Name'
+                                        placeholder={ t('model.new.namePlaceholder') }
                                         onChange={ this.handleChangeModelName }
                                         value={ modelName }
                                     />
@@ -48,7 +48,7 @@ class ModelNew extends Component {
                                 </Form.Field>
 
                                 <Button type='submit' as={ Link } to="/add-data" >
-                                    { t('naming.next-button') }
+                                    { t('model.new.nextButton') }
                                 </Button>
 
                                 {/* <Button type='submit' as={Link} to="/add-data" disabled={modelList.indexOf(modelName) > -1 || modelName===""}>GO</Button> */ }

@@ -1,10 +1,6 @@
 import axios from 'axios'
 
-// test with http://httpbin.org/post
 const baseUrl = (process.env.REACT_APP_BASEURL) ? process.env.REACT_APP_BASEURL : 'http://127.0.0.1:5000'
-
-console.log("process.env.REACT_APP_BASEURL", process.env.REACT_APP_BASEURL)
-console.log("baseUrl", baseUrl)
 
 const getApi = (url, successFunction) => {
     return dispatch => {
@@ -50,6 +46,33 @@ var successHandler = {
     updateNewTranscriptionFile: response => ({ type: 'UPDATE_NEW_TRANSCRIPTION_FILE', response })
 }
 
+// * * * * * * * * * * DATA BUNDLES * * * * * * * * * * * * * * *
+
+export const newDataBundle = () => {
+    const url = baseUrl + '/api/data-bundle/new';
+    return postApi(url, null, 'newDataBundle');
+}
+
+export const updateDataBundleName = postData => {
+    const url = baseUrl + '/api/data-bundle/name';
+    return postApi(url, postData, 'updateDataBundleName');
+}
+
+export const updateDataBundleDate = postData => {
+    const url = baseUrl + '/api/data-bundle/date';
+    return postApi(url, postData, 'updateDataBundleDate');
+}
+
+export const updateDataBundleFiles = postData => {
+    const url = baseUrl + '/api/model/data-bundle/files';
+    const headers = {headers: {'content-type': 'multipart/form-data'}}
+    return postApi(url, postData, 'updateDataBundleFiles', headers);
+}
+
+
+
+// * * * * * * * * * * MODEL * * * * * * * * * * * * * * *
+
 export const newModel = () => {
     const url = baseUrl + '/api/model/new';
     return postApi(url, null, 'newModel');
@@ -61,14 +84,8 @@ export const updateModelName = postData => {
 }
 
 export const updateModelDate = postData => {
-    const url = baseUrl + '/date';
+    const url = baseUrl + '/api/model/date';
     return postApi(url, postData, 'updateModelDate');
-}
-
-export const updateModelTranscriptionFiles = postData => {
-    const url = baseUrl + '/api/model/transcription-files';
-    const headers = {headers: {'content-type': 'multipart/form-data'}}
-    return postApi(url, postData, 'updateModelTranscriptionFiles', headers);
 }
 
 export const updateModelPronunciationFile = postData => {
@@ -77,16 +94,17 @@ export const updateModelPronunciationFile = postData => {
     return postApi(url, postData, 'updateModelPronunciationFile', headers);
 }
 
-// TODO: use /api/settings/settings
 export const updateModelSettings = postData => {
     const url = baseUrl + '/api/model/settings';
     console.log('postData', postData)
     return postApi(url, postData, 'updateModelSettings');
 }
+export const getModelLexicon = () => ({ type: 'GET_MODEL_LEXICON' })
 
-// TODO: use /api/transcription/new
+
+// * * * * * * * * * * TRANSCRIPTION * * * * * * * * * * * * * * *
+
 export const updateNewTranscriptionFile = postData => {
-    // console.log('action got updateNewTranscriptionFile')
     // const url = "http://httpbin.org/post"
     const url = baseUrl + '/api/transcription/audio';
     const headers = {headers: {'content-type': 'multipart/form-data'}}
