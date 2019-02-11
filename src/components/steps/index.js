@@ -1,15 +1,19 @@
-export { default as StepWelcome } from './StepWelcome';
+export { default as Welcome } from './Welcome';
 
-export { default as StepNaming } from './StepNaming';
-export { default as StepAddData } from './StepAddData';
-export { default as StepDataPreparation } from './StepDataPreparation';
-export { default as StepDataPreparationError } from './StepDataPreparationError'
-export { default as StepBuildPronunciationDictionary } from './StepBuildPronunciationDictionary';
+export { default as DataBundleList } from './DataBundle/List';
+export { default as DataBundleNew } from './DataBundle/New';
+export { default as DataBundleAddFiles } from './DataBundle/AddFiles';
+export { default as DataBundlePreparation } from './DataBundle/Preparation';
+export { default as DataBundlePreparationError } from './DataBundle/PreparationError'
 
-export { default as StepModelSettings } from './StepModelSettings'
-export { default as StepModelTraining } from './StepModelTraining'
-export { default as StepTrainingSuccess } from './StepTrainingSuccess'
-export { default as StepTrainingError } from './StepTrainingError'
+export { default as ModelList } from './Model/List'
+export { default as ModelNew } from './Model/New';
+export { default as ModelPronunciationDictionary } from './Model/PronunciationDictionary';
+export { default as ModelLexicon } from './Model/Lexicon'
+export { default as ModelSettings } from './Model/Settings'
+export { default as ModelTraining } from './Model/Training'
+export { default as ModelTrainingResults } from './Model/TrainingResults'
+export { default as ModelTrainingError } from './Model/TrainingError'
 
-export { default as StepNewTranscription } from './StepNewTranscription'
-export { default as StepNewTranscriptionResults } from './StepNewTranscriptionResults'
+export { default as NewTranscription } from './Transcription/New'
+export { default as NewTranscriptionResults } from './Transcription/Results'

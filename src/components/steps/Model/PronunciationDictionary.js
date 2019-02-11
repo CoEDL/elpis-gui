@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { Grid, Header, Segment, Icon, Divider, Button } from 'semantic-ui-react';
-import StepBranding from './StepBranding';
-import StepInformer from '../StepInformer';
+import { connect } from 'react-redux';
+import { translate } from 'react-i18next';
+import classNames from "classnames";
 import Dropzone from "react-dropzone";
 import { fromEvent } from "file-selector";
-import { translate } from 'react-i18next';
-import { updateModelPronunciationFile } from '../../redux/actions';
-import { connect } from 'react-redux';
-import classNames from "classnames";
+import { updateModelPronunciationFile } from 'redux/actions';
+import Branding from 'components/Steps/Shared/Branding';
+import Informer from 'components/Steps/Shared/Informer';
 
-class StepBuildPronunciationDictionary extends Component {
+class ModelPronunciationDictionary extends Component {
 
     onDrop = (acceptedFiles, rejectedFiles) => {
         console.log("files dropped:", acceptedFiles);
@@ -28,19 +28,19 @@ class StepBuildPronunciationDictionary extends Component {
 
         return (
             <div>
-                <StepBranding />
+                <Branding />
                 <Segment>
                     <Grid centered>
-                        <Grid.Column width={ 6 }>
-                            <StepInformer />
+                        <Grid.Column width={ 4 }>
+                            <Informer />
                         </Grid.Column>
-                        <Grid.Column width={ 10 }>
+                        <Grid.Column width={ 12 }>
                             <Header as='h1'>
-                                { t('buildPron.title') }
+                                { t('model.pronDict.title') }
                             </Header>
 
                             <p>
-                                { t('buildPron.description') }
+                                { t('model.pronDict.description') }
                             </p>
 
                             <Divider />
@@ -58,8 +58,8 @@ class StepBuildPronunciationDictionary extends Component {
 
                                             {
                                                 isDragActive ? (
-                                                    <p>{ t('buildPron.dropFilesHintDragActive') } </p>
-                                                ) : (<p>{ t('buildPron.dropFilesHint') }</p>)
+                                                    <p>{ t('model.pronDict.dropFilesHintDragActive') } </p>
+                                                ) : (<p>{ t('model.pronDict.dropFilesHint') }</p>)
                                             }
                                         </div>
                                     );
@@ -72,8 +72,8 @@ class StepBuildPronunciationDictionary extends Component {
 
                             <Divider />
 
-                            <Button type='submit' as={ Link } to="/model-settings">
-                                { t('buildPron.nextButton') }
+                            <Button type='submit' as={ Link } to="/model/lexicon">
+                                { t('model.pronDict.nextButton') }
                             </Button>
 
                         </Grid.Column>
@@ -96,4 +96,4 @@ const mapDispatchToProps = dispatch => ({
     }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(translate('common')(StepBuildPronunciationDictionary));
+export default connect(mapStateToProps, mapDispatchToProps)(translate('common')(ModelPronunciationDictionary));

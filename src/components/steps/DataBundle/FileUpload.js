@@ -3,7 +3,7 @@ import classNames from "classnames";
 import Dropzone from "react-dropzone";
 import { fromEvent } from "file-selector";
 import { translate } from 'react-i18next';
-import { updateModelTranscriptionFiles } from '../../redux/actions';
+import { updateModelTranscriptionFiles } from 'redux/actions';
 import { connect } from 'react-redux';
 
 class FileUpload extends Component {
@@ -42,8 +42,8 @@ class FileUpload extends Component {
 
                                 {
                                     isDragActive ? (
-                                        <p>{ t('fileUpload.dropFilesHintDragActive') } </p>
-                                    ) : (<p>{ t('fileUpload.dropFilesHint') }</p>)
+                                        <p>{ t('dataBundle.fileUpload.dropFilesHintDragActive') } </p>
+                                    ) : (<p>{ t('dataBundle.fileUpload.dropFilesHint') }</p>)
                                 }
                             </div>
                         );

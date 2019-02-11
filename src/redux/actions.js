@@ -1,6 +1,10 @@
 import axios from 'axios'
 
+// test with http://httpbin.org/post
 const baseUrl = (process.env.REACT_APP_BASEURL) ? process.env.REACT_APP_BASEURL : 'http://127.0.0.1:5000'
+
+console.log("process.env.REACT_APP_BASEURL", process.env.REACT_APP_BASEURL)
+console.log("baseUrl", baseUrl)
 
 const getApi = (url, successFunction) => {
     return dispatch => {
