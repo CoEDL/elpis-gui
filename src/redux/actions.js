@@ -155,7 +155,7 @@ export const transcriptionNew = postData => {
 
 // * * * * * * * * * * GENERAL * * * * * * * * * * * * * * *
 
-export const setCurrentStep = (urlParams) => ({ type: 'SET_CURRENT_STEP', urlParams })
+export const setCurrentStep = (url) => ({ type: 'SET_CURRENT_STEP', url })
 
 export const replaceFiles = (status) => ({ type: 'REPLACE_FILES', status })
 
