@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Header, Segment, Icon, Button } from 'semantic-ui-react';
+import { Grid, Header, List, Segment, Icon, Button } from 'semantic-ui-react';
 import { translate } from 'react-i18next';
 import Branding from 'components/Steps/Shared/Branding';
 import Informer from 'components/Steps/Shared/Informer';
@@ -17,9 +17,30 @@ class ModelList extends Component {
                         </Grid.Column>
 
                         <Grid.Column width={ 12 }>
-                            <Header as='h1'>
-                                list of models
-                            </Header>
+                            <Header as='h1'>Previously trained models</Header>
+                            <List>
+                                <List.Item>
+                                    <List.Icon name='square outline' />
+                                    <List.Content>English-Indonesian 1-gram</List.Content>
+                                </List.Item>
+                                <List.Item>
+                                    <List.Icon name='square outline' />
+                                    <List.Content>English-Indonesian 3-gram</List.Content>
+                                </List.Item>
+                                <List.Item>
+                                    <List.Icon name='square outline' />
+                                    <List.Content>English-Indonesian 5-gram with Indonesian 12s</List.Content>
+                                </List.Item>
+                                <List.Item>
+                                    <List.Icon name='square outline' />
+                                    <List.Content>Indonesian 1-gram</List.Content>
+                                </List.Item>
+                                <List.Item>
+                                    <List.Icon name='square outline' />
+                                    <List.Content>Everything 3-gram with Indonesian 12s</List.Content>
+                                </List.Item>
+                            </List>
+
                         </Grid.Column>
                     </Grid>
                 </Segment>
