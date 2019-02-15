@@ -9,7 +9,7 @@ import Informer from 'components/Steps/Shared/Informer';
 
 class ModelTraining extends Component {
     componentDidMount = () => {
-        // this.props.triggerApiWaiting('now training')
+        this.props.triggerApiWaiting('now training')
     }
     render() {
         const { t, settings, apiWaiting } = this.props;
@@ -92,9 +92,12 @@ class ModelTraining extends Component {
                         </Grid.Column>
                     </Grid>
                 </Segment>
-                <Dimmer active={false && apiWaiting.status}>
+
+                {/* temporarily disable with 'false &&' */}
+                <Dimmer active={ false && apiWaiting.status }>
                     <Loader size="massive"  content={apiWaiting.message} />
                 </Dimmer>
+
             </div>
         );
     }
