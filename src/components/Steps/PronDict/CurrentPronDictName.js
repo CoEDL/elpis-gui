@@ -25,6 +25,8 @@ class CurrentPronDictName extends Component {
         (
             <Message color='olive'>
                 {t('pronDict.common.currentPronDictLabel') + name }
+                <br />
+                {t('dataBundle.common.currentDataBundleLabel') + dataBundleName }
             </Message>
         ) : (
             <Message negative>

@@ -38,6 +38,7 @@
         "prepare": {
             "title": "Prepare",
             "header": "Word frequency of training files",
+            "description": "This is showing only the transcription text, not additional words.",
             "bannerMessage": "Text has been cleaned and normalised OK",
             "bannerMessageDetailed": "Punctuation has been removed.",
             "wordlistHeader": "Wordlist",

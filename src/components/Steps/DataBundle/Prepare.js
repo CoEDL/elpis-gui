@@ -46,6 +46,7 @@ class DataBundlePrepare extends Component {
         const listEl = list.length > 0 ? (
             <>
             <h2>{ t('dataBundle.prepare.header') }</h2>
+            <p>{ t('dataBundle.prepare.description') }</p>
             <Table sortable celled fixed unstackable>
                 <Table.Header>
                     <Table.Row>
