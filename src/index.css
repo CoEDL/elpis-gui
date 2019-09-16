@@ -87,6 +87,9 @@ textarea.lexicon {
 .right {
     float: right
 }
+.ui.styled.accordion > div {
+    border-bottom: 5px solid white;
+}
 
 .ui.styled.accordion .content {
     padding: 0 !important;
