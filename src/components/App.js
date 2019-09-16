@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css'
-// TODO, how to import and get the icon fonts as well?
-// for now, back to using the html CDN link
-import 'semantic-ui-css/semantic.min.css'
 
 import {
     Welcome,
