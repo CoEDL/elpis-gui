@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import { Button, Checkbox, Divider, Form, Grid, Header, Icon, Input, List, Message, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import { Formik, ErrorMessage } from 'formik';
+import { Formik, Field, ErrorMessage } from 'formik';
 import { datasetSettings, datasetPrepare } from 'redux/actions/datasetActions';
 import Branding from 'components/Shared/Branding';
 import SideNav from 'components/Shared/SideNav';
@@ -54,6 +54,9 @@ class DatasetFiles extends Component {
                  t('dataset.files.filesHeader')
             ) : null
 
+        console.log( settings.tier_types, settings.tier_type )
+        console.log( settings.tier_names, settings.tier_name )
+
         return (
             <div>
                 <Branding />
@@ -100,35 +103,36 @@ class DatasetFiles extends Component {
                                     </Grid.Column>
                                 </Grid>
                             </Segment>
-
                             <Segment>
                                 <Header as='h3'>
                                     { t('dataset.files.settingsHeader') }
                                 </Header>
 
-                                <Message attached content={ t('dataset.files.settingsDescription') } />
-
                                 <Formik
                                     className="attached"
                                     enableReinitialize
                                     initialValues={ {
-                                        tier: settings.tier,
+                                        tier_types: settings.tier_types,
+                                        tier_type: settings.tier_type,
+                                        tier_names: settings.tier_names,
+                                        tier_name: settings.tier_name,
                                         punctuation_to_explode_by: settings.punctuation_to_explode_by
                                     } }
                                     validate={ values => {
                                         let errors = {};
-                                        if (!values.tier) {
-                                            errors.tier = 'Required';
-                                        } else if (
-                                            !/^[ 0-9a-zA-Z\-_@]+$/i.test(values.tier)
-                                        ) {
-                                            errors.tier = t('dataset.common.invalidCharacterErrorMessage');
-                                        }
+                                        // if (!values.tier) {
+                                        //     errors.tier = 'Required';
+                                        // } else if (
+                                        //     !/^[ 0-9a-zA-Z\-_@]+$/i.test(values.tier)
+                                        // ) {
+                                        //     errors.tier = t('dataset.common.invalidCharacterErrorMessage');
+                                        // }
                                         return errors;
                                     } }
                                     onSubmit={ (values, { setSubmitting }) => {
                                         const postData = {
-                                            tier: values.tier,
+                                            tier_type: values.tier_type,
+                                            tier_name: values.tier_name,
                                             punctuation_to_explode_by: values.punctuation_to_explode_by
                                         }
                                         datasetSettings(postData)
@@ -142,33 +146,53 @@ class DatasetFiles extends Component {
                                         handleSubmit,
                                         handleChange,
                                         isSubmitting,
+                                        setFieldValue
                                         /* and other goodies */
                                     }) => (
-                                            <Form onSubmit={ handleSubmit }>
+                                            <Form onSubmit={handleSubmit}>
+                                                <Message attached content={t('dataset.files.tierTypeDescription')} />
+
                                                 <Form.Field>
-                                                    <Input
-                                                        label={ t('dataset.files.tierLabel') }
-                                                        value={ values.tier }
-                                                        name="tier"
-                                                        type="text"
-                                                        onChange={ handleChange } />
-                                                    <ErrorMessage component="div" className="error" name="tier" />
+                                                    <Field component="select" name="tier_type" onChange={e => {
+                                                        setFieldValue('tier_type', e.target.value);
+                                                        setFieldValue('tier_name', '');
+                                                    }}>
+                                                        <option></option>
+                                                        {values.tier_types.map(name =>
+                                                            (<option key={name} value={name}>{name}</option>))
+                                                        }
+                                                    </Field>
                                                 </Form.Field>
+
+                                                <Message attached content={t('dataset.files.tierNameDescription')} />
+                                                <Form.Field>
+                                                    <Field component="select" name="tier_name" onChange={e => {
+                                                        setFieldValue('tier_type', '');
+                                                        setFieldValue('tier_name', e.target.value);
+                                                    }}>
+                                                        <option></option>
+                                                        {values.tier_names.map(name =>
+                                                            (<option key={name} value={name}>{name}</option>))
+                                                        }
+                                                    </Field>
+                                                </Form.Field>
+
+                                                <Message attached content={t('dataset.files.puncDescription')} />
                                                 <Form.Field>
                                                     <Input
-                                                        label={ t('dataset.files.puncLabel') }
-                                                        value={values.punctuation_to_explode_by }
+                                                        label={t('dataset.files.puncLabel')}
+                                                        value={values.punctuation_to_explode_by}
                                                         name="punctuation_to_explode_by"
                                                         type="text"
-                                                        onChange={ handleChange } />
+                                                        onChange={handleChange} />
                                                 </Form.Field>
+
                                                 <Button type="button" onClick={handleSubmit} disabled={interactionDisabled}>
                                                     { t('dataset.files.saveButton') }
                                                 </Button>
                                             </Form>
                                         ) }
                                 </Formik>
-
                             </Segment>
 
                             <Divider />
