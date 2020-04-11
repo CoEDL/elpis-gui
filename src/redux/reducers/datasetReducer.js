@@ -9,8 +9,10 @@ const initState = {
     transcriptionFiles: [],
     additionalTextFiles: [],
     settings: {
+        tier_max_count: 4,
         tier_types: ["a","b"],
         tier_names: ["c","d"],
+        tier_order: 1,
         tier_type: "",
         tier_name: "",
         punctuation_to_explode_by: ""
@@ -30,14 +32,38 @@ const dataset = (state = initState, action) => {
             return {...state}
 
         case actionTypes.DATASET_NEW_SUCCESS:
-            var { name, tier_types, tier_names, tier_type, tier_name, punctuation_to_explode_by } = action.response.data.data.config
-            console.log("tier_type", tier_type)
-            console.log("punctuation_to_explode_by", punctuation_to_explode_by)
-            return { ...initState, name, settings: { ...state.settings, tier_types, tier_names, tier_type, tier_name, punctuation_to_explode_by }, }
+            var {name,
+                tier_max_count,
+                tier_types,
+                tier_names,
+                tier_order,
+                tier_type,
+                tier_name,
+                punctuation_to_explode_by } = action.response.data.data.config
+            console.log("DATASET_NEW_SUCCESS name", name)
+            return { ...initState,
+                name,
+                settings: {
+                    ...state.settings,
+                    tier_max_count,
+                    tier_types,
+                    tier_names,
+                    tier_order,
+                    tier_type,
+                    tier_name,
+                    punctuation_to_explode_by }}
 
         case actionTypes.DATASET_LOAD_SUCCESS:
             // loading existing data set might have files and settings
-            var { name, tier_types, tier_names, tier_type, tier_name, punctuation_to_explode_by, files } = action.response.data.data.config
+            var { name,
+                tier_max_count,
+                tier_types,
+                tier_names,
+                tier_order,
+                tier_type,
+                tier_name,
+                punctuation_to_explode_by,
+                files } = action.response.data.data.config
             // action.data is an array of filenames. parse this, split into separate lists
             var audioFiles = files.filter(file => getFileExtension(file) === 'wav').sort()
             var transcriptionFiles = files.filter(file => getFileExtension(file) === 'eaf').sort()
@@ -52,7 +78,14 @@ const dataset = (state = initState, action) => {
                 audioFiles,
                 transcriptionFiles,
                 additionalTextFiles,
-                settings: { ...state.settings, tier_types, tier_names, tier_type, tier_name, punctuation_to_explode_by },
+                settings: { ...state.settings,
+                    tier_max_count,
+                    tier_types,
+                    tier_names,
+                    tier_order,
+                    tier_type,
+                    tier_name,
+                    punctuation_to_explode_by },
                 wordlist: "",
             }
 
@@ -75,15 +108,17 @@ const dataset = (state = initState, action) => {
                 var additionalTextFiles = data.files.filter(file => getFileExtension(file) === 'txt').sort()
                 // remove duplicates
                 audioFiles = [...(new Set(audioFiles))];
-                console.log("tier_types", data.tier_types)
-                console.log("tier_names", data.tier_names)
                 return {
                     ...state,
                     status: "loaded",
                     audioFiles,
                     transcriptionFiles,
                     additionalTextFiles,
-                    settings: { ...state.settings, tier_types: data.tier_types, tier_names: data.tier_names }
+                    settings: { ...state.settings,
+                        tier_max_count: data.tier_max_count,
+                        tier_types: data.tier_types,
+                        tier_names: data.tier_names
+                    }
                 }
             } else {
                 console.log(data)
@@ -98,6 +133,7 @@ const dataset = (state = initState, action) => {
                     settings: { ...state.settings,
                         tier_type: data.tier_type,
                         tier_name: data.tier_name,
+                        tier_order: data.tier_order,
                         punctuation_to_explode_by: data.punctuation_to_explode_by}
                 }
             } else {

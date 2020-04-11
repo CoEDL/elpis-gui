@@ -54,8 +54,12 @@ class DatasetFiles extends Component {
                  t('dataset.files.filesHeader')
             ) : null
 
-        console.log( settings.tier_types, settings.tier_type )
-        console.log( settings.tier_names, settings.tier_name )
+        const writeCountOptions = []
+        for (var i = 1; i <= settings.tier_max_count; i++) {
+            writeCountOptions.push(
+                <option key={i} value={i}>{i}</option>
+            )
+        }
 
         return (
             <div>
@@ -116,6 +120,8 @@ class DatasetFiles extends Component {
                                         tier_type: settings.tier_type,
                                         tier_names: settings.tier_names,
                                         tier_name: settings.tier_name,
+                                        tier_orders: settings.tier_orders,
+                                        tier_order: settings.tier_order,
                                         punctuation_to_explode_by: settings.punctuation_to_explode_by
                                     } }
                                     validate={ values => {
@@ -133,6 +139,7 @@ class DatasetFiles extends Component {
                                         const postData = {
                                             tier_type: values.tier_type,
                                             tier_name: values.tier_name,
+                                            tier_order: values.tier_order,
                                             punctuation_to_explode_by: values.punctuation_to_explode_by
                                         }
                                         datasetSettings(postData)
@@ -150,12 +157,30 @@ class DatasetFiles extends Component {
                                         /* and other goodies */
                                     }) => (
                                             <Form onSubmit={handleSubmit}>
-                                                <Message attached content={t('dataset.files.tierTypeDescription')} />
 
+                                                <Header as='h4'>
+                                                    {t('dataset.files.settingsTierHeader')}
+                                                </Header>
+
+                                                <Message attached content={t('dataset.files.tierOrderDescription')} />
+                                                <Form.Field>
+                                                    <Field component="select" name="tier_order" onChange={e => {
+                                                        setFieldValue('tier_type', '');
+                                                        setFieldValue('tier_name', '');
+                                                        setFieldValue('tier_order', e.target.value);
+                                                        console.log("setting tier order", e.target.value)
+                                                    }}>
+                                                        <option></option>
+                                                        {writeCountOptions}
+                                                    </Field>
+                                                </Form.Field>
+
+                                                <Message attached content={t('dataset.files.tierTypeDescription')} />
                                                 <Form.Field>
                                                     <Field component="select" name="tier_type" onChange={e => {
                                                         setFieldValue('tier_type', e.target.value);
                                                         setFieldValue('tier_name', '');
+                                                        setFieldValue('tier_order', '');
                                                     }}>
                                                         <option></option>
                                                         {values.tier_types.map(name =>
@@ -168,6 +193,7 @@ class DatasetFiles extends Component {
                                                 <Form.Field>
                                                     <Field component="select" name="tier_name" onChange={e => {
                                                         setFieldValue('tier_type', '');
+                                                        setFieldValue('tier_order', '');
                                                         setFieldValue('tier_name', e.target.value);
                                                     }}>
                                                         <option></option>
@@ -176,6 +202,10 @@ class DatasetFiles extends Component {
                                                         }
                                                     </Field>
                                                 </Form.Field>
+
+                                                <Header as='h4'>
+                                                    {t('dataset.files.settingsPunctuationHeader')}
+                                                </Header>
 
                                                 <Message attached content={t('dataset.files.puncDescription')} />
                                                 <Form.Field>
@@ -186,6 +216,7 @@ class DatasetFiles extends Component {
                                                         type="text"
                                                         onChange={handleChange} />
                                                 </Form.Field>
+
 
                                                 <Button type="button" onClick={handleSubmit} disabled={interactionDisabled}>
                                                     { t('dataset.files.saveButton') }
