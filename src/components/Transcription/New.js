@@ -74,13 +74,18 @@ class NewTranscription extends Component {
     }
 
     render = () => {
-        const { t, filename, list, status, text, modelName } = this.props;
+        const { t, filename, list, status, stage_status, text, modelName } = this.props;
 
-        const listOptions = list.map(model => ({"key": model.name, "value": model.name, "text": model.name}))
+        //Only show trained models
+        const listTrained = list.filter(model => model.status === 'trained')
+        const listOptions = listTrained.map(model => ({
+            "key": model.name,
+            "value": model.name,
+            "text": model.name
+        }))
 
-        // preven the buttnos from being clicked if we haven't got
-        // an active model, or file to transcribe
-        let enableButtons = (modelName && filename &&
+        // prevent the buttons from being clicked if we haven't got an active model, or file to transcribe
+        let enableTranscription = (modelName && filename &&
             (status == 'ready' || status == 'transcribed' )) ? true : false
 
         const loadingIcon = (status == 'transcribing') ? (
@@ -101,7 +106,9 @@ class NewTranscription extends Component {
                                 { t('transcription.new.title') }
                             </Header>
 
-                            <CurrentModelName />
+                            {modelName &&
+                            <CurrentModelName/>
+                            }
 
                             <Segment>
                                 {listOptions &&
@@ -145,14 +152,36 @@ class NewTranscription extends Component {
                             }
 
                             <Segment>
-                                <Button onClick={this.handleTranscribe} disabled={!enableButtons} >
+                                <Button onClick={this.handleTranscribe} disabled={!enableTranscription} >
                                     {t('transcription.new.transcribe')}
                                 </Button>
                             </Segment>
 
-                            <Segment>
-                                {loadingIcon} {status}
-                            </Segment>
+                            <Message icon>
+                                { loadingIcon }
+                                <Message.Content>
+                                    <Message.Header>{ status }</Message.Header>
+                                    {stage_status &&
+                                    <div className="stages">
+                                        {Object.keys(stage_status).map((stage, i) => {
+                                                let name = stage_status[stage]["name"]
+                                                let status = stage_status[stage]["status"]
+                                                let message = stage_status[stage]["message"]
+                                                return (
+                                                    <p key={stage} className="stage">
+                                                        <span className="name">{name}</span>
+                                                        <span className="divider">{status && <>|</>}</span>
+                                                        <span className="status">{status}</span>
+                                                        <span className="divider">{message && <>|</>}</span>
+                                                        <span className="message">{message}</span>
+                                                    </p>
+                                                )
+                                            }
+                                        )}
+                                    </div>
+                                    }
+                                </Message.Content>
+                            </Message>
 
                             {status=='transcribed' &&
                                 <Segment>
@@ -182,6 +211,7 @@ const mapStateToProps = state => {
         modelName: state.model.name,
         filename: state.transcription.filename,
         status: state.transcription.status,
+        stage_status: state.transcription.stage_status,
         text: state.transcription.text,
         elan: state.transcription.elan
     }

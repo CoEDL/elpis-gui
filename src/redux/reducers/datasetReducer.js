@@ -11,10 +11,13 @@ const initState = {
     additionalTextFiles: [],
     settings: null,
     ui: null,
-    punctuation_to_explode_by: "",
-    punctuation_to_collapsed_by: "",
-    wordlist: {}
+    wordlist: {},
+    error: ''
 }
+
+let audioFiles = []
+let additionalTextFiles = []
+let transcriptionFiles = []
 
 const dataset = (state = initState, action) => {
     switch (action.type) {
@@ -25,28 +28,18 @@ const dataset = (state = initState, action) => {
             return {...state};
 
         case actionTypes.DATASET_NEW_SUCCESS: {
-            let dataset_state = action.response.data.data.state;
-
-            let name = dataset_state.name;
-            let punctuation_to_explode_by = dataset_state.punctuation_to_explode_by;
-
-            let importer_name = null;
-            let settings = null;
-            let ui = null;
-            
-            if (dataset_state.importer !== null) {
-                name =     dataset_state.importer.name;
-                settings = dataset_state.importer.settings;
-                ui =       dataset_state.importer.ui;
+            if (action.response.data.status==500){
+                return { ...initState,
+                    status: action.response.data.status,
+                    error: action.response.data.error
+                }
+            } else {
+                let dataset_state = action.response.data.data.state;
+                let name = dataset_state.name;
+                return { ...initState,
+                    name
+                }
             }
-
-            console.log("DATASET_NEW_SUCCESS name", name);
-            return { ...initState,
-                name,
-                importer_name,
-                settings,
-                ui,
-                punctuation_to_explode_by}
         }
 
         case actionTypes.DATASET_LOAD_SUCCESS: {
@@ -55,17 +48,15 @@ const dataset = (state = initState, action) => {
             let {
                 name,
                 files,
-                settings,
-                ui,
-                punctuation_to_explode_by
-            } = dataset_state;
+                importer
+            } = dataset_state
             // action.data is an array of filenames. parse this, split into separate lists
-            var audioFiles = files.filter(file => getFileExtension(file) === 'wav').sort();
-            var additionalTextFiles = files.filter(file => getFileExtension(file) === 'txt').sort();
-            var transcriptionFiles = files.filter(file => {
+            audioFiles = files.filter(file => getFileExtension(file) === 'wav').sort();
+            additionalTextFiles = files.filter(file => getFileExtension(file) === 'txt').sort();
+            transcriptionFiles = files.filter(file => {
                 return (getFileExtension(file) !== 'wav' && getFileExtension(file) !== 'txt')
             }).sort();
-            // remove duplicates (should do this on the server though!)
+            // remove duplicates
             audioFiles = [...(new Set(audioFiles))];
             transcriptionFiles = [...(new Set(transcriptionFiles))];
             return {
@@ -75,11 +66,11 @@ const dataset = (state = initState, action) => {
                 audioFiles,
                 transcriptionFiles,
                 additionalTextFiles,
-                settings,
-                ui,
-                punctuation_to_explode_by,
-                wordlist: "",
-            };
+                importer_name: importer.name,
+                settings: importer.settings,
+                ui: importer.ui,
+                wordlist: {},
+            }
         }
 
         case actionTypes.DATASET_LIST_SUCCESS:
@@ -96,9 +87,9 @@ const dataset = (state = initState, action) => {
             var { data, status } = action.response.data
             if (status === 200) {
                 // action.data is an array of filenames. parse this, split into separate lists
-                var audioFiles = data.files.filter(file => getFileExtension(file) === 'wav').sort()
-                var transcriptionFiles = data.files.filter(file => getFileExtension(file) === 'eaf').sort()
-                var additionalTextFiles = data.files.filter(file => getFileExtension(file) === 'txt').sort()
+                audioFiles = data.files.filter(file => getFileExtension(file) === 'wav').sort()
+                transcriptionFiles = data.files.filter(file => getFileExtension(file) === 'eaf').sort()
+                additionalTextFiles = data.files.filter(file => getFileExtension(file) === 'txt').sort()
                 // remove duplicates
                 audioFiles = [...(new Set(audioFiles))];
                 return {
@@ -152,6 +143,8 @@ const dataset = (state = initState, action) => {
                 console.log( data )
                 return { ...state }
             }
+
+
 
         default:
             return { ...state }

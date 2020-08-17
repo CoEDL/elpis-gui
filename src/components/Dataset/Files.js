@@ -21,7 +21,16 @@ class DatasetFiles extends Component {
 
     render() {
 
-        const { t, name, status, audioFiles, transcriptionFiles, additionalTextFiles, settings, ui, datasetSettings } = this.props;
+        const { t,
+            name,
+            status,
+            audioFiles,
+            transcriptionFiles,
+            additionalTextFiles,
+            importer_name,
+            settings,
+            ui,
+            datasetSettings } = this.props;
 
         const interactionDisabled = name ? false : true
 
@@ -114,21 +123,6 @@ class DatasetFiles extends Component {
 
                                 <GeneratedUI settings={settings} ui={ui} changeSettingsCallback={datasetSettings} />
                             </Segment>
-                            <Segment>
-                                <Header as='h4'>
-                                    { t('dataset.files.generalSettingsHeader') }
-                                </Header>
-                                <Form>
-                                    <Form.Field>
-                                        <label>Punctuation to explode by</label>
-                                        <Input type='text' />
-                                    </Form.Field>
-                                    <Form.Field>
-                                        <label>Punctuation to collapse by</label>
-                                        <Input type='text' />
-                                    </Form.Field>
-                                </Form>
-                            </Segment>
 
                             <Divider />
 
@@ -150,6 +144,7 @@ const mapStateToProps = state => {
         audioFiles: state.dataset.audioFiles,
         transcriptionFiles: state.dataset.transcriptionFiles,
         additionalTextFiles: state.dataset.additionalTextFiles,
+        importer_name: state.dataset.importer_name,
         settings: state.dataset.settings,
         ui: state.dataset.ui,
         status: state.dataset.status
@@ -175,4 +170,4 @@ export default withRouter(
     )(
         translate('common')(DatasetFiles)
     )
-);
+)
