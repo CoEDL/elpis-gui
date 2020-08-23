@@ -19,7 +19,7 @@ const SelectEngine = props => {
     };
 
     let options = list.map((name, i) => ({key: name, text: name, value: name}));
-    
+
     return (
         <div>
             <Branding />
@@ -36,10 +36,11 @@ const SelectEngine = props => {
 
                         <CurrentEngineName />
 
+                        {useEffect(engineList)}
+
                         {(()=>{
                             // If the engines list has not been populated, fetch the list and display a wait message.
                             if (list.length === 0) {
-                                useEffect(engineList); // Alternative to componentDidMount
                                 return (
                                     <div>Updating engine list...</div>
                                 )
