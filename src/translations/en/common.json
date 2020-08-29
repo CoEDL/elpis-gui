@@ -2,6 +2,15 @@
     "welcome": {
         "title": "Elpis"
     },
+    "engine": {
+        "select": {
+            "title": "Engine"
+        },
+        "common": {
+            "currentEngineLabel": "Current engine: ",
+            "noCurrentEngineLabel": "No engine selected yet."
+        }
+    },
     "dataset": {
         "common": {
             "currentDatasetLabel": "Current recordings: ",
@@ -47,21 +56,15 @@
             "bannerMessageDetailed": "Punctuation has been removed.",
             "wordlistHeader": "Wordlist",
             "frequencyHeader": "Frequency",
+            "ready": "Ready to process.",
+            "preparing": "The files are being processed.",
             "noWords": "No words found, please upload some files or check your import settings."
-        }
-    },
-    "engine": {
-        "select": {
-            "title": "Select Engine"
-        },
-        "common": {
-            "currentEngineLabel": "Current engine: ",
-            "noCurrentEngineLabel": "No engine selected yet."
         }
     },
     "pronDict": {
         "common": {
             "currentPronDictLabel": "Current pronunciation dictionary: ",
+            "noDatasetsLabel": "Recordings are required before making pronunciation dictionary.",
             "noCurrentPronDictLabel": "No current pronunciation dictionary.",
             "chooseOrNewLabel": "Choose one."
         },
@@ -127,20 +130,19 @@
         },
         "results": {
             "title": "Results",
-            "description": "List of models that have been run here.",
-            "downloadButton": "Download a set of the model, settings and information about training information",
+            "description": "List of training sessions that have been run here.",
+            "downloadButton": "Download a set of the training, settings and information about training information",
             "downloadModalHeader": "Your files and settings are being compiled",
             "downloadModalContent": "Click Save on your browser's download dialog",
             "downloadOkButton": "OK",
             "newTranscribeButton": "Transcribe new audio",
-            "oops": "Oops, this is showing the most recently trained results, not necessarily for the selected model.",
             "noResults": "No results found"
         }
     },
     "transcription": {
         "new": {
             "title": "Transcribe some audio",
-            "selectModelLabel": "Select a model to use",
+            "selectModelLabel": "Select a training session to use",
             "dropFilesHint": "Upload or drop an audio file here",
             "dropFilesHintDragActive": "Here here..",
             "addAudioButton": "Add Audio",
@@ -164,6 +166,9 @@
         "addNewButton": "Add New",
         "nextButton": "Next",
         "newButton": "New",
+        "firstSelectAnEngine": "First, select an engine.",
+        "makeNewOne": "Make a new one using the form below.",
+        "selectExisting": "Or select an existing one from the list.",
         "selectOneBelow": "Make a new one, or select one from the list below.",
         "choose": "Choose",
         "chooseOrNewLabel": "Choose one.",
