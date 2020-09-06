@@ -28,6 +28,7 @@ class PronDictL2S extends Component {
         const interactionDisabled = name ? false : true
 
         const pron = l2s ? (
+            //TODO(jack) Insert grapheme frequency graph here
             <pre>
                 { l2s }
             </pre>

@@ -42,8 +42,8 @@ class DatasetPrepare extends Component {
 
     handleTabChange = (e, { activeIndex }) => this.setState({ activeTab: activeIndex })
 
-    generateTickValues = (wordlist) => {
-        var yValues = wordlist.map(word => word.frequency);
+    generateTickValues = (freqlist) => {
+        var yValues = freqlist.map(value => value.frequency);
         var max = Math.max(...yValues);
         if (max < 10) {
             return max;
@@ -61,11 +61,6 @@ class DatasetPrepare extends Component {
         const { activeTab } = this.state
 
         const interactionDisabled = (this.props.name && wordlist.length > 0) ? false : true
-
-        const sortingControls =
-            <div>
-
-            </div>
 
         const wordFreqGraph = (wordlist) =>
             <div style={{ height: 500 }}>
