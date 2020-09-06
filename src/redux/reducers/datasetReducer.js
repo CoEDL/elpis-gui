@@ -45,7 +45,6 @@ const dataset = (state = initState, action) => {
         case actionTypes.DATASET_LOAD_SUCCESS: {
             // loading existing data set might have files and settings
             let dataset_state = action.response.data.data.state;
-            console.log("dataset load success, dataset_state", dataset_state)
             let {
                 name,
                 files,
@@ -137,13 +136,15 @@ const dataset = (state = initState, action) => {
                 const wordlist = Object.keys(wordlistObj).map( key => {
                     return ({ name: key, frequency: wordlistObj[key] })
                 })
-                if (wordlist.length > 0) return { ...state, wordlist }
+                if (wordlist.length > 0) return { ...state, wordlist, "status": "wordlist-prepared"}
                 else return { ...state }
             } else {
                 // Errors are formatted as { status: code, data: message }
                 console.log( data )
                 return { ...state }
             }
+
+
 
         default:
             return { ...state }
