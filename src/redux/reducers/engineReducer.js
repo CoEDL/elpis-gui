@@ -20,6 +20,8 @@ const engine = (state = initialEngineState, action) => {
 
 		case actionTypes.ENGINE_LOAD_SUCCESS:
 			let engine = action.response.data.data.engine;
+			console.log("engine reducer got engine", engine)
+			if (!engine) engine = "espnet"
 			return { ...state, engine };
 
 		default:

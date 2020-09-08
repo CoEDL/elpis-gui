@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import './App.css'
 
-import Welcome from './Welcome'
+import Welcome from './Intro/Welcome'
+import ChooseTrainingType from './Intro/ChooseTrainingType'
 import EngineDashboard from './Engine/EngineDashboard'
 import DatasetDashboard from './Dataset/Dashboard'
 import DatasetNew from './Dataset/New'
@@ -30,7 +31,8 @@ class App extends Component {
             <div className="App">
                 <Router>
                     <PageContainer>
-                        <Route path="/" exact component={ Welcome } />
+                        <Route path={urls.gui.intro.home} exact component={ Welcome } />
+                        <Route path={urls.gui.intro.choose_training_type} exact component={ ChooseTrainingType } />
 
                         <Route path={urls.gui.engine.index} exact component={EngineDashboard} />
 
@@ -51,6 +53,7 @@ class App extends Component {
                         <Route path={urls.gui.model.results} exact component={ ModelResults } />
 
                         <Route path={urls.gui.transcription.new} component={ NewTranscription } />
+
                     </PageContainer>
                 </Router>
             </div>

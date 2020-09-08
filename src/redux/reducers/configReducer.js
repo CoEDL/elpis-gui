@@ -14,6 +14,7 @@ const config = (state = initState, action) => {
 
         case actionTypes.CONFIG_OBJECT_NAMES_SUCCESS:
             const { object_names } = action.response.data.data
+            console.log("config reducer got", object_names)
             return {...state,
                 datasetList:  object_names.datasets,
                 pronDictList: object_names.pron_dicts,

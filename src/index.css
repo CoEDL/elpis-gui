@@ -130,3 +130,12 @@ label.pad-right,
 .top-nav .ui.selection.dropdown {
     min-width: 8em;
 }
+
+.ui.button.home-button {
+    background-color: #ccc;
+    padding: 1em;
+    border-radius: 1em;
+    text-align: center;
+    font-size: 2em;
+    font-weight: normal;
+}

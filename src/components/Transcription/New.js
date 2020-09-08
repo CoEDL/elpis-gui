@@ -96,109 +96,101 @@ class NewTranscription extends Component {
             <div>
                 <Branding />
                 <Segment>
-                    <Grid centered>
-                        <Grid.Column width={ 4 }>
-                            <SideNav />
-                        </Grid.Column>
+                    <Header as='h1' text="true">
+                        { t('transcription.new.title') }
+                    </Header>
 
-                        <Grid.Column width={ 12 }>
-                            <Header as='h1' text="true">
-                                { t('transcription.new.title') }
-                            </Header>
+                    {modelName &&
+                    <CurrentModelName/>
+                    }
 
-                            {modelName &&
-                            <CurrentModelName/>
-                            }
+                    <Segment>
+                        {listOptions &&
+                            <Form.Field>
+                            <label className="pad-right">{t('transcription.new.selectModelLabel')}</label>
+                                <Dropdown
+                                    placeholder={t('common.choose')}
+                                    selection
+                                    name="model_name"
+                                    options={listOptions}
+                                    defaultValue={modelName ? modelName : ''}
+                                    onChange={this.handleSelectModel} />
+                            </Form.Field>
+                        }
+                    </Segment>
 
-                            <Segment>
-                                {listOptions &&
-                                    <Form.Field>
-                                    <label className="pad-right">{t('transcription.new.selectModelLabel')}</label>
-                                        <Dropdown
-                                            placeholder={t('common.choose')}
-                                            selection
-                                            name="model_name"
-                                            options={listOptions}
-                                            defaultValue={modelName ? modelName : ''}
-                                            onChange={this.handleSelectModel} />
-                                    </Form.Field>
-                                }
-                            </Segment>
+                    <Dropzone className="dropzone" onDrop={ this.onDrop } getDataTransferItems={ evt => fromEvent(evt) }>
+                        { ({ getRootProps, getInputProps, isDragActive }) => {
+                            return (
+                                <div
+                                    { ...getRootProps() }
+                                    className={ classNames("dropzone", {
+                                        "dropzone_active": isDragActive
+                                    }) }
+                                >
+                                    <input { ...getInputProps() } />
 
-                            <Dropzone className="dropzone" onDrop={ this.onDrop } getDataTransferItems={ evt => fromEvent(evt) }>
-                                { ({ getRootProps, getInputProps, isDragActive }) => {
-                                    return (
-                                        <div
-                                            { ...getRootProps() }
-                                            className={ classNames("dropzone", {
-                                                "dropzone_active": isDragActive
-                                            }) }
-                                        >
-                                            <input { ...getInputProps() } />
-
-                                            {
-                                                isDragActive ? (
-                                                    <p>{ t('transcription.new.dropFilesHintDragActive') } </p>
-                                                ) : (<p>{ t('transcription.new.dropFilesHint') }</p>)
-                                            }
-                                            <Button>{t('transcription.new.uploadButton')}</Button>
-                                        </div>
-                                    );
-                                } }
-                            </Dropzone>
-
-                            {filename &&
-                                <Segment>{t('transcription.new.usingAudio', { filename })} </Segment>
-                            }
-
-                            <Segment>
-                                <Button onClick={this.handleTranscribe} disabled={!enableTranscription} >
-                                    {t('transcription.new.transcribe')}
-                                </Button>
-                            </Segment>
-
-                            <Message icon>
-                                { loadingIcon }
-                                <Message.Content>
-                                    <Message.Header>{ status }</Message.Header>
-                                    {stage_status &&
-                                    <div className="stages">
-                                        {Object.keys(stage_status).map((stage, i) => {
-                                                let name = stage_status[stage]["name"]
-                                                let status = stage_status[stage]["status"]
-                                                let message = stage_status[stage]["message"]
-                                                return (
-                                                    <p key={stage} className="stage">
-                                                        <span className="name">{name}</span>
-                                                        <span className="divider">{status && <>|</>}</span>
-                                                        <span className="status">{status}</span>
-                                                        <span className="divider">{message && <>|</>}</span>
-                                                        <span className="message">{message}</span>
-                                                    </p>
-                                                )
-                                            }
-                                        )}
-                                    </div>
+                                    {
+                                        isDragActive ? (
+                                            <p>{ t('transcription.new.dropFilesHintDragActive') } </p>
+                                        ) : (<p>{ t('transcription.new.dropFilesHint') }</p>)
                                     }
-                                </Message.Content>
-                            </Message>
+                                    <Button>{t('transcription.new.uploadButton')}</Button>
+                                </div>
+                            );
+                        } }
+                    </Dropzone>
 
-                            {status=='transcribed' &&
-                                <Segment>
-                                    <p>{text}</p>
+                    {filename &&
+                        <Segment>{t('transcription.new.usingAudio', { filename })} </Segment>
+                    }
 
-                                    <p className="label pad-right">{t('transcription.results.downloadLabel')}</p>
-                                    <Button onClick={this.handleDownloadText}>
-                                        {t('transcription.results.downloadTextButton')}
-                                    </Button>
-                                    <Button onClick={this.handleDownloadElan}>
-                                        {t('transcription.results.downloadElanButton')}
-                                    </Button>
-                                </Segment>
+                    <Segment>
+                        <Button onClick={this.handleTranscribe} disabled={!enableTranscription} >
+                            {t('transcription.new.transcribe')}
+                        </Button>
+                    </Segment>
+
+                    <Message icon>
+                        { loadingIcon }
+                        <Message.Content>
+                            <Message.Header>{ status }</Message.Header>
+                            {stage_status &&
+                            <div className="stages">
+                                {Object.keys(stage_status).map((stage, i) => {
+                                        let name = stage_status[stage]["name"]
+                                        let status = stage_status[stage]["status"]
+                                        let message = stage_status[stage]["message"]
+                                        return (
+                                            <p key={stage} className="stage">
+                                                <span className="name">{name}</span>
+                                                <span className="divider">{status && <>|</>}</span>
+                                                <span className="status">{status}</span>
+                                                <span className="divider">{message && <>|</>}</span>
+                                                <span className="message">{message}</span>
+                                            </p>
+                                        )
+                                    }
+                                )}
+                            </div>
                             }
+                        </Message.Content>
+                    </Message>
 
-                        </Grid.Column>
-                    </Grid>
+                    {status=='transcribed' &&
+                        <Segment>
+                            <p>{text}</p>
+
+                            <p className="label pad-right">{t('transcription.results.downloadLabel')}</p>
+                            <Button onClick={this.handleDownloadText}>
+                                {t('transcription.results.downloadTextButton')}
+                            </Button>
+                            <Button onClick={this.handleDownloadElan}>
+                                {t('transcription.results.downloadElanButton')}
+                            </Button>
+                        </Segment>
+                    }
+
                 </Segment>
             </div>
         );

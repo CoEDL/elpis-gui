@@ -1,5 +1,12 @@
 export default {
     "gui": {
+        "intro": {
+            "home": "/",
+            "choose_training_type": "/training_type"
+        },
+        "engine": {
+            "index": "/engine"
+        },
         "dataset": {
             "index": "/dataset",
             "new": "/dataset/new",
@@ -7,9 +14,6 @@ export default {
             "prepare": "/dataset/prepare",
             "prepareError": "/dataset/prepare/error",
             "punctuation_to_explode_by": "/dataset/punctuation_to_explode_by"
-        },
-        "engine": {
-            "index": "/engine"
         },
         "pronDict": {
             "index": "/pron-dict",
@@ -26,8 +30,7 @@ export default {
             "error": "/model/error"
         },
         "transcription": {
-            "new": "/transcription/new",
-            "results": "/transcription/results"
+            "new": "/transcribe/"
         }
     },
     "api": {
