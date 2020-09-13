@@ -73,6 +73,15 @@ export default {
             "status": "/api/transcription/status",
             "text": "/api/transcription/text",
             "elan": "/api/transcription/elan"
+        },
+        "statistics": {
+            "wordFreq": "/api/statistics/frequency/word",
+            "l2sFreq": "/api/statistics/frequency/graphemes",
+            "count": "/api/statistics/count",
+            "annotated": "/api/statistics/annotated",
+            "sankeyWord": "/api/statistics/sankey/word",
+            "sankeyGraph": "/api/statistics/sankey/grapheme",
+            "swarmplot": "/api/statistics/swarmplot/files"
         }
     }
 }
