@@ -43,7 +43,7 @@ class NewForm extends Component {
             <Formik
                 enableReinitialize
                 initialValues={{
-                    name: 'm',
+                    name: '',
                     dataset_name: defaultDatasetName,
                     pron_dict_name: defaultPronDictName
                 }}

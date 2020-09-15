@@ -30,7 +30,7 @@ class NewForm extends Component {
             <Formik
                 enableReinitialize
                 initialValues={{
-                    name: 'pd',
+                    name: '',
                     dataset_name: defaultDatasetName
                 }}
                 validate={values => {

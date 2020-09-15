@@ -17,7 +17,7 @@ class NewForm extends Component {
             <Formik
                 enableReinitialize
                 initialValues={{
-                    name: 'ds'
+                    name: ''
                 }}
                 validate={values => {
                     let errors = {};
@@ -60,7 +60,7 @@ class NewForm extends Component {
                                 <p className={"error-message"}>{error}</p>
                             }
                             <Button type="button" onClick={handleSubmit}>
-                                {t('common.addNewButton')}
+                                {t('common.nextButton')}
                             </Button>
                         </Form>
                     )}
