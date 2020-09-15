@@ -37,7 +37,7 @@ class DatasetPrepare extends Component {
     }
 
     render() {
-        const { t, additionalTextFiles, currentEngine, status, wordlist } = this.props
+        const { t, additionalTextFiles, currentEngine, name, status, wordlist } = this.props
         const { column, direction } = this.state
 
         const interactionDisabled = (this.props.name && wordlist.length > 0) ? false : true
@@ -118,7 +118,9 @@ class DatasetPrepare extends Component {
                             }
                             {status === 'wordlist-prepared' &&
                                 <>
-                                    {listEl}
+                                    <div className="wordlist-container">
+                                        {listEl}
+                                    </div>
 
                                     <Button as={Link}
                                             to={(currentEngine==="kaldi") ? urls.gui.pronDict.index :
