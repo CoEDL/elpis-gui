@@ -91,15 +91,16 @@ class PronDictL2S extends Component {
                                 </Segment>
                                 }
 
-                                <Button as={Link} to={urls.gui.pronDict.lexicon} disabled={interactionDisabled}>
-                                    {t('common.nextButton')}
-                                </Button>
 
                                 {pron &&
-                                <Segment>
+                                <Segment className="l2s-container">
                                     {pron}
                                 </Segment>
                                 }
+
+                                <Button as={Link} to={urls.gui.pronDict.lexicon} disabled={interactionDisabled}>
+                                    {t('common.nextButton')}
+                                </Button>
                             </>
                             }
 
