@@ -42,36 +42,33 @@ class StepWelcome extends Component {
 					<p>
 					The orthographic and phonemic transcription services that Elpis offers require different sources of language information to build its ASR system.
 					</p>
-					<p>
-					Below is a quick construction of the stages per either orthographic or phonemic service, the input needed and the output produced.
-					</p>
 
-				</Segment>
 
-				<Grid divided='vertically'>
-					<Grid.Row columns={2}>
-						<Grid.Column>
-							<Button
-								fluid
-								className={"home-button"}
-								as={Link}
-								to={urls.gui.intro.choose_training_type}>
-								Train
-							</Button>
-						</Grid.Column>
-						<Grid.Column>
-							{list && list.length > 0 &&
+					<Grid divided='vertically'>
+						<Grid.Row columns={2}>
+							<Grid.Column>
 								<Button
 									fluid
 									className={"home-button"}
 									as={Link}
-									to={urls.gui.transcription.new}>
-									Transcribe
+									to={urls.gui.intro.choose_training_type}>
+									Train
 								</Button>
-							}
-						</Grid.Column>
-					</Grid.Row>
-				</Grid>
+							</Grid.Column>
+							<Grid.Column>
+								{list && list.length > 0 &&
+									<Button
+										fluid
+										className={"home-button"}
+										as={Link}
+										to={urls.gui.transcription.new}>
+										Transcribe
+									</Button>
+								}
+							</Grid.Column>
+						</Grid.Row>
+					</Grid>
+				</Segment>
 			</>
 		);
 	}

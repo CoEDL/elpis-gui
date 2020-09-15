@@ -20,7 +20,7 @@ class StepBranding extends Component {
                     <Image floated="left" src={elpisLogo} className="logo" alt="logo" />
                 </Link>
                 <div className={"right"}>
-                    <SelectEngine />
+                    {/*<SelectEngine />*/}
                     <Button basic onClick={this.reset}>reset</Button>
                 </div>
             </Segment>

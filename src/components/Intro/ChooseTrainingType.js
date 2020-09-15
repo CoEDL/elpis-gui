@@ -23,30 +23,28 @@ const ChooseTrainingType = () => {
         <>
             <Branding />
             <Segment>
-                <p>Choose training type</p>
+                <p>Choose a training type.</p>
+                <Grid divided='vertically'>
+                    <Grid.Row columns={2}>
+                        <Grid.Column>
+                            <Button
+                                fluid
+                                className={"home-button"}
+                                onClick={() => selectEngine('kaldi')}>
+                                Orthographic
+                            </Button>
+                        </Grid.Column>
+                        <Grid.Column>
+                            <Button
+                                fluid
+                                className={"home-button"}
+                                onClick={() => selectEngine('espnet')}>
+                                Phonemic
+                            </Button>
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
             </Segment>
-
-            <Grid divided='vertically'>
-                <Grid.Row columns={2}>
-                    <Grid.Column>
-                        <Button
-                            fluid
-                            className={"home-button"}
-                            onClick={() => selectEngine('kaldi')}>
-                            Orthographic
-                        </Button>
-                    </Grid.Column>
-                    <Grid.Column>
-                        <Button
-                            fluid
-                            className={"home-button"}
-                            onClick={() => selectEngine('espnet')}>
-                            Phonemic
-                        </Button>
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
-
         </>
     )
 }
