@@ -17,7 +17,7 @@
             "noCurrentDatasetLabel": "No groups of recordings yet."
         },
         "dashboard": {
-            "title": "Recordings",
+            "title": "Group of recordings",
             "noneMessage": "No groups of recordings yet."
         },
         "new": {
