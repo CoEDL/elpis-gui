@@ -132,10 +132,13 @@ label.pad-right,
 }
 
 .ui.button.home-button {
-    background-color: #ccc;
+    background: #e0e1e2 none;
     padding: 1em;
     border-radius: 1em;
     text-align: center;
     font-size: 2em;
     font-weight: normal;
+}
+.ui.button.home-button:hover {
+     background-color: #cacbcd;
 }
