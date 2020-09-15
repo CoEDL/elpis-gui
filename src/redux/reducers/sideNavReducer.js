@@ -94,13 +94,11 @@ const sideNav = (state = initialStepModelState, action) => {
 
 		case actionTypes.ENGINE_LOAD_SUCCESS:
 			let engine = action.response.data.data.engine;
-			console.log("sidenav reducer got engine", engine)
 			if (!engine) engine = "espnet"
 			return { ...state, engine}
 
 
 		case actionTypes.APP_SET_CURRENT_STEP: {
-			console.log("sidenav reducer setting current step", state)
 			let currentSubStepIndex = 0;
 			let currentStepName = null;
 			// Make a copy of the original steps as to not override the initial steps.
@@ -132,7 +130,6 @@ const sideNav = (state = initialStepModelState, action) => {
 
 				// Determine whether step is to be kept based on selected engine.
 				if (step.engine_specific && step.engine_specific !== state.engine) {
-					console.log("skip this menu item, engine specific and not a match", step, state.engine)
 					// The engine has been specified and this step does not belong to this engine.
 					return; // Skip construction step.
 				}
