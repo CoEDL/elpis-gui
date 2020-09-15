@@ -13,7 +13,7 @@
     },
     "dataset": {
         "common": {
-            "currentDatasetLabel": "Current recordings: ",
+            "currentDatasetLabel": "Current group of recordings: ",
             "noCurrentDatasetLabel": "No groups of recordings yet."
         },
         "dashboard": {

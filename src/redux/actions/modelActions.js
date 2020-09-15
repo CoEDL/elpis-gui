@@ -74,12 +74,13 @@ const modelLoadFailure = error => ({
 
 /* * * * * * * * * * * *  LIST * * * * * * * * * * *  */
 
-export function modelList() {
+export function modelList(postData) {
+    console.log("model list")
     const url = baseUrl + urls.api.model.list
     var responseData
     return async dispatch => {
         dispatch(modelListStarted())
-        await axios.get(url)
+        await axios.post(url, postData)
             .then(response => {
                 responseData = response.data
                 dispatch(modelListSuccess(response))

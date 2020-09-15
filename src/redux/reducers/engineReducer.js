@@ -1,10 +1,13 @@
 import * as actionTypes from '../actionTypes/appActionTypes';
+import * as modelActionTypes from '../actionTypes/modelActionTypes';
 import urls from 'urls'
 
 const initialEngineState = {
     engine: null,
     engine_list: []
 }
+
+var selected_engine = ""
 
 const engine = (state = initialEngineState, action) => {
 	switch (action.type) {
@@ -19,10 +22,17 @@ const engine = (state = initialEngineState, action) => {
 			return { ...state, engine_list };
 
 		case actionTypes.ENGINE_LOAD_SUCCESS:
-			let engine = action.response.data.data.engine;
-			console.log("engine reducer got engine", engine)
-			if (!engine) engine = "espnet"
-			return { ...state, engine };
+			selected_engine = action.response.data.data.engine;
+			console.log("engine reducer got engine", selected_engine)
+			if (!selected_engine) selected_engine = "espnet"
+			return { ...state, engine: selected_engine };
+
+		//	listen for model load, and set engine if not already selected
+        case modelActionTypes.MODEL_LOAD_SUCCESS:
+        	console.log("MODEL_LOAD_SUCCESS", action.response.data.data.config)
+			selected_engine = action.response.data.data.config.engine;
+			if (!selected_engine) selected_engine = "espnet"
+			return { ...state, engine: selected_engine };
 
 		default:
 			return { ...state }

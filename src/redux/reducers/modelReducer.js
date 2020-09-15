@@ -35,6 +35,7 @@ const model = (state = initState, action) => {
 
         case actionTypes.MODEL_LOAD_SUCCESS:
             var { name, dataset_name, pron_dict_name, ngram } = action.response.data.data.config
+            // console.log("MODEL LOAD", action.response.data.data.config)
             // pron_dict_name could be null if not using pron dicts
             return {
                 ...state,

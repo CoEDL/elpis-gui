@@ -66,8 +66,9 @@ class NewTranscription extends Component {
         const { list, modelLoad } = this.props
         // get the matching ds and pd values
         var selectedModel = list.filter(m => m.name==value)
+        console.log("selectedModel", selectedModel)
         // argh, this is weird, but reusing code from Model Dashboard
-        const modelData = { name: selectedModel[0].name }
+        const modelData = { name: selectedModel[0].name, engine: selectedModel[0].engine }
         const datasetData = { name: selectedModel[0].dataset_name }
         const pronDictData = { name: selectedModel[0].pron_dict_name }
         modelLoad(modelData, datasetData, pronDictData)

@@ -11,7 +11,8 @@ import urls from 'urls'
 class StepWelcome extends Component {
 
     componentDidMount() {
-        this.props.modelList()
+    	const postData = {selected_engine: "kaldi"}
+        this.props.modelList(postData)
     }
 
 	render() {
@@ -82,8 +83,8 @@ const mapStateToProps = state => {
     }
 }
 const mapDispatchToProps = dispatch => ({
-    modelList: () => {
-        dispatch(modelList())
+    modelList: postData => {
+        dispatch(modelList(postData))
     }
 })
 export default connect(mapStateToProps, mapDispatchToProps)(translate('common')(StepWelcome))
