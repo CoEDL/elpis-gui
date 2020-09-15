@@ -31,10 +31,10 @@ class CurrentPronDictName extends Component {
                 {currentEngine && !name &&
                 <Message color='purple'>
                     {onDashboard && pronDictList.length === 0 &&
-                        t('common.makeNewOne')
+                        t('pronDict.common.makeNewOne')
                     }
                     {onDashboard && pronDictList.length > 0 &&
-                        t('common.selectOneBelow')
+                        t('pronDict.common.selectOneBelow')
                     }
                     {!onDashboard &&
                         <>

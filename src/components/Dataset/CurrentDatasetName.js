@@ -29,10 +29,10 @@ class CurrentDatasetName extends Component {
                 {currentEngine && !name &&
                 <Message color='purple'>
                     {onDashboard && datasetList.length === 0 &&
-                        t('common.makeNewOne')
+                        t('dataset.common.makeNewOne')
                     }
                     {onDashboard && datasetList.length > 0 &&
-                        t('common.selectOneBelow')
+                        t('dataset.common.selectOneBelow')
                     }
                     {!onDashboard &&
                         <>

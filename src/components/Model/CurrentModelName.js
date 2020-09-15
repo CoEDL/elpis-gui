@@ -33,10 +33,10 @@ class CurrentModelName extends Component {
                 {currentEngine && !name &&
                 <Message color='purple'>
                     {onDashboard && modelList.length === 0 &&
-                        t('common.makeNewOne')
+                        t('model.common.makeNewOne')
                     }
                     {onDashboard && modelList.length > 0 &&
-                        t('common.selectOneBelow')
+                        t('model.common.selectOneBelow')
                     }
                     {!onDashboard &&
                         <>

@@ -14,7 +14,9 @@
     "dataset": {
         "common": {
             "currentDatasetLabel": "Current group of recordings: ",
-            "noCurrentDatasetLabel": "No groups of recordings yet."
+            "noCurrentDatasetLabel": "No groups of recordings yet.",
+            "makeNewOne": "Make a new group of recordings.",
+            "selectOneBelow": "Make a new group of recordings, or select one from the list below."
         },
         "dashboard": {
             "title": "Group of recordings",
@@ -66,7 +68,9 @@
             "currentPronDictLabel": "Current pronunciation dictionary: ",
             "noDatasetsLabel": "Recordings are required before making pronunciation dictionary.",
             "noCurrentPronDictLabel": "No current pronunciation dictionary.",
-            "chooseOrNewLabel": "Choose one."
+            "chooseOrNewLabel": "Choose one.",
+            "makeNewOne": "Make a new pronunciation dictionary.",
+            "selectOneBelow": "Make a new pronunciation dictionary, or select one from the list below."
         },
         "dashboard": {
             "title": "Pronunciation Dictionary",
@@ -94,7 +98,9 @@
         "common": {
             "currentModelLabel": "Current training session: ",
             "noCurrentModelLabel": "No current training session.",
-            "chooseOrNewLabel": "Choose one."
+            "chooseOrNewLabel": "Choose one.",
+            "makeNewOne": "Start a new training session.",
+            "selectOneBelow": "Start a new training session, or select one from the list below."
         },
         "dashboard": {
             "title": "Training",
