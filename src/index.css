@@ -142,3 +142,9 @@ label.pad-right,
 .ui.button.home-button:hover {
      background-color: #cacbcd;
 }
+.wordlist-container {
+    max-height: 400px;
+    overflow-y: scroll;
+    border: 1px solid #aaa;
+    padding: 1em;
+}

@@ -49,39 +49,40 @@ class DatasetPrepare extends Component {
             { additionalTextFiles.length > 0 &&
                 <p>{ t('dataset.prepare.description') }</p>
             }
-
-            <Table sortable celled fixed unstackable>
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell
-                            sorted={ column === 'name' ? direction : null }
-                                onClick={this.handleSort('name', wordlist) }
-                        >
-                            Word
-                        </Table.HeaderCell>
-                        <Table.HeaderCell
-                            sorted={ column === 'frequency' ? direction : null }
-                                onClick={this.handleSort('frequency', wordlist) }
-                        >
-                            Frequency
-                        </Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                    {
-                        wordlist.map(word => {
-                            return (
-                                <Table.Row key={ word.name }>
-                                    <Table.Cell>
-                                        { word.name }
-                                    </Table.Cell>
-                                    <Table.Cell>{ word.frequency }</Table.Cell>
-                                </Table.Row>
-                            )
-                        })
-                    }
-                </Table.Body>
-            </Table>
+            <Segment className="wordlist-container">
+                <Table sortable celled fixed unstackable>
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell
+                                sorted={ column === 'name' ? direction : null }
+                                    onClick={this.handleSort('name', wordlist) }
+                            >
+                                Word
+                            </Table.HeaderCell>
+                            <Table.HeaderCell
+                                sorted={ column === 'frequency' ? direction : null }
+                                    onClick={this.handleSort('frequency', wordlist) }
+                            >
+                                Frequency
+                            </Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                        {
+                            wordlist.map(word => {
+                                return (
+                                    <Table.Row key={ word.name }>
+                                        <Table.Cell>
+                                            { word.name }
+                                        </Table.Cell>
+                                        <Table.Cell>{ word.frequency }</Table.Cell>
+                                    </Table.Row>
+                                )
+                            })
+                        }
+                    </Table.Body>
+                        </Table>
+            </Segment>
             </>
         ) : null
 
@@ -118,9 +119,7 @@ class DatasetPrepare extends Component {
                             }
                             {status === 'wordlist-prepared' &&
                                 <>
-                                    <div className="wordlist-container">
-                                        {listEl}
-                                    </div>
+                                    {listEl}
 
                                     <Button as={Link}
                                             to={(currentEngine==="kaldi") ? urls.gui.pronDict.index :
