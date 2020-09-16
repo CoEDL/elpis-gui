@@ -30,7 +30,8 @@ export default {
             "error": "/model/error"
         },
         "transcription": {
-            "new": "/transcribe/"
+            "no_sidebar": "/transcription/ns",
+            "new": "/transcription/"
         }
     },
     "api": {

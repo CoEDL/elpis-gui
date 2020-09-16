@@ -18,7 +18,7 @@ import ModelNew from './Model/New'
 import ModelSettings from './Model/Settings'
 import ModelTrain from './Model/Train'
 import ModelResults from './Model/Results'
-import NewTranscription from './Transcription/New'
+import TranscriptionPage from './Transcription/TranscriptionPage'
 
 
 import PageContainer from './PageContainer';
@@ -52,7 +52,7 @@ class App extends Component {
                         <Route path={urls.gui.model.train} exact component={ ModelTrain } />
                         <Route path={urls.gui.model.results} exact component={ ModelResults } />
 
-                        <Route path={urls.gui.transcription.new} component={ NewTranscription } />
+                        <Route path={urls.gui.transcription.new + ":options*"} component={ TranscriptionPage } />
 
                     </PageContainer>
                 </Router>

@@ -75,7 +75,6 @@ const modelLoadFailure = error => ({
 /* * * * * * * * * * * *  LIST * * * * * * * * * * *  */
 
 export function modelList(postData) {
-    console.log("model list")
     const url = baseUrl + urls.api.model.list
     var responseData
     return async dispatch => {

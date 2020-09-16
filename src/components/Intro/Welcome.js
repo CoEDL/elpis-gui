@@ -61,7 +61,7 @@ class StepWelcome extends Component {
 										fluid
 										className={"home-button"}
 										as={Link}
-										to={urls.gui.transcription.new}>
+										to={urls.gui.transcription.no_sidebar}>
 										Transcribe
 									</Button>
 								}

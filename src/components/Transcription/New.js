@@ -17,8 +17,6 @@ import {
 import { modelLoad, modelList } from 'redux/actions/modelActions';
 import { datasetLoad } from 'redux/actions/datasetActions';
 import { pronDictLoad } from 'redux/actions/pronDictActions';
-import Branding from 'components/Shared/Branding';
-import SideNav from 'components/Shared/SideNav';
 import CurrentModelName from "components/Model/CurrentModelName";
 import urls from 'urls'
 
@@ -92,109 +90,105 @@ class NewTranscription extends Component {
         const loadingIcon = (status == 'transcribing') ? (
             <Icon name='circle notched' size="big" loading />
         ) : null
-
+        
         return (
-            <div>
-                <Branding />
-                <Segment>
-                    <Header as='h1' text="true">
-                        { t('transcription.new.title') }
-                    </Header>
+            <>
+                <Header as='h1' text="true">
+                    { t('transcription.new.title') }
+                </Header>
 
-                    {modelName &&
+                {modelName &&
                     <CurrentModelName/>
-                    }
+                }
 
-                    <Segment>
-                        {listOptions &&
-                            <Form.Field>
-                            <label className="pad-right">{t('transcription.new.selectModelLabel')}</label>
-                                <Dropdown
-                                    placeholder={t('common.choose')}
-                                    selection
-                                    name="model_name"
-                                    options={listOptions}
-                                    defaultValue={modelName ? modelName : ''}
-                                    onChange={this.handleSelectModel} />
-                            </Form.Field>
+                <Segment>
+                    {listOptions &&
+                        <Form.Field>
+                        <label className="pad-right">{t('transcription.new.selectModelLabel')}</label>
+                            <Dropdown
+                                placeholder={t('common.choose')}
+                                selection
+                                name="model_name"
+                                options={listOptions}
+                                defaultValue={modelName ? modelName : ''}
+                                onChange={this.handleSelectModel} />
+                        </Form.Field>
+                    }
+                </Segment>
+
+                <Dropzone className="dropzone" onDrop={ this.onDrop } getDataTransferItems={ evt => fromEvent(evt) }>
+                    { ({ getRootProps, getInputProps, isDragActive }) => {
+                        return (
+                            <div
+                                { ...getRootProps() }
+                                className={ classNames("dropzone", {
+                                    "dropzone_active": isDragActive
+                                }) }
+                            >
+                                <input { ...getInputProps() } />
+
+                                {
+                                    isDragActive ? (
+                                        <p>{ t('transcription.new.dropFilesHintDragActive') } </p>
+                                    ) : (<p>{ t('transcription.new.dropFilesHint') }</p>)
+                                }
+                                <Button>{t('transcription.new.uploadButton')}</Button>
+                            </div>
+                        );
+                    } }
+                </Dropzone>
+
+                {filename &&
+                    <Segment>{t('transcription.new.usingAudio', { filename })} </Segment>
+                }
+
+                <Segment>
+                    <Button onClick={this.handleTranscribe} disabled={!enableTranscription} >
+                        {t('transcription.new.transcribe')}
+                    </Button>
+                </Segment>
+
+                <Message icon>
+                    { loadingIcon }
+                    <Message.Content>
+                        <Message.Header>{ status }</Message.Header>
+                        {stage_status &&
+                        <div className="stages">
+                            {Object.keys(stage_status).map((stage, i) => {
+                                    let name = stage_status[stage]["name"]
+                                    let status = stage_status[stage]["status"]
+                                    let message = stage_status[stage]["message"]
+                                    return (
+                                        <p key={stage} className="stage">
+                                            <span className="name">{name}</span>
+                                            <span className="divider">{status && <>|</>}</span>
+                                            <span className="status">{status}</span>
+                                            <span className="divider">{message && <>|</>}</span>
+                                            <span className="message">{message}</span>
+                                        </p>
+                                    )
+                                }
+                            )}
+                        </div>
                         }
-                    </Segment>
+                    </Message.Content>
+                </Message>
 
-                    <Dropzone className="dropzone" onDrop={ this.onDrop } getDataTransferItems={ evt => fromEvent(evt) }>
-                        { ({ getRootProps, getInputProps, isDragActive }) => {
-                            return (
-                                <div
-                                    { ...getRootProps() }
-                                    className={ classNames("dropzone", {
-                                        "dropzone_active": isDragActive
-                                    }) }
-                                >
-                                    <input { ...getInputProps() } />
-
-                                    {
-                                        isDragActive ? (
-                                            <p>{ t('transcription.new.dropFilesHintDragActive') } </p>
-                                        ) : (<p>{ t('transcription.new.dropFilesHint') }</p>)
-                                    }
-                                    <Button>{t('transcription.new.uploadButton')}</Button>
-                                </div>
-                            );
-                        } }
-                    </Dropzone>
-
-                    {filename &&
-                        <Segment>{t('transcription.new.usingAudio', { filename })} </Segment>
-                    }
-
+                {status=='transcribed' &&
                     <Segment>
-                        <Button onClick={this.handleTranscribe} disabled={!enableTranscription} >
-                            {t('transcription.new.transcribe')}
+                        <p>{text}</p>
+
+                        <p className="label pad-right">{t('transcription.results.downloadLabel')}</p>
+                        <Button onClick={this.handleDownloadText}>
+                            {t('transcription.results.downloadTextButton')}
+                        </Button>
+                        <Button onClick={this.handleDownloadElan}>
+                            {t('transcription.results.downloadElanButton')}
                         </Button>
                     </Segment>
-
-                    <Message icon>
-                        { loadingIcon }
-                        <Message.Content>
-                            <Message.Header>{ status }</Message.Header>
-                            {stage_status &&
-                            <div className="stages">
-                                {Object.keys(stage_status).map((stage, i) => {
-                                        let name = stage_status[stage]["name"]
-                                        let status = stage_status[stage]["status"]
-                                        let message = stage_status[stage]["message"]
-                                        return (
-                                            <p key={stage} className="stage">
-                                                <span className="name">{name}</span>
-                                                <span className="divider">{status && <>|</>}</span>
-                                                <span className="status">{status}</span>
-                                                <span className="divider">{message && <>|</>}</span>
-                                                <span className="message">{message}</span>
-                                            </p>
-                                        )
-                                    }
-                                )}
-                            </div>
-                            }
-                        </Message.Content>
-                    </Message>
-
-                    {status=='transcribed' &&
-                        <Segment>
-                            <p>{text}</p>
-
-                            <p className="label pad-right">{t('transcription.results.downloadLabel')}</p>
-                            <Button onClick={this.handleDownloadText}>
-                                {t('transcription.results.downloadTextButton')}
-                            </Button>
-                            <Button onClick={this.handleDownloadElan}>
-                                {t('transcription.results.downloadElanButton')}
-                            </Button>
-                        </Segment>
-                    }
-
-                </Segment>
-            </div>
-        );
+                }
+            </>
+        )
     }
 }
 
