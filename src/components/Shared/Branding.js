@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import elpisLogo from './elpis.png'
 import { connect } from 'react-redux';
 import { configReset } from 'redux/actions/configActions';
-import 'react-semantic-toasts/styles/react-semantic-alert.css';
+import SelectEngine from 'components/Engine/SelectEngine'
 
 class StepBranding extends Component {
     state = { open: false }
