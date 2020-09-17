@@ -4,6 +4,7 @@ import { Button, Divider, Form, Grid, Header, Message, Segment, TextArea } from 
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { pronDictBuildLexicon, pronDictSaveLexicon, pronDictUpdateLexicon } from 'redux/actions/pronDictActions';
+import cogoToast from 'cogo-toast';
 import Branding from 'components/Shared/Branding';
 import SideNav from 'components/Shared/SideNav';
 import CurrentPronDictName from "./CurrentPronDictName";
@@ -15,16 +16,21 @@ class PronDictLexicon extends Component {
     componentDidMount = () => {
         const { lexicon } = this.props
         if (!lexicon) this.generateLexicon()
-
     }
 
     generateLexicon = () => {
         this.props.pronDictBuildLexicon()
     }
 
+    resetLexicon = () => {
+        this.generateLexicon()
+        cogoToast.info("Reset dictionary");
+    }
+
     saveLexicon = () => {
         const data = { "lexicon": this.props.lexicon }
         this.props.pronDictSaveLexicon(data)
+        cogoToast.success("Saved");
     }
 
     handleChange = (event) => {
@@ -76,7 +82,7 @@ class PronDictLexicon extends Component {
                                         </TextArea>
                                     </Form>
                                     <Button.Group size="tiny">
-                                        <Button onClick={this.generateLexicon} disabled={interactionDisabled}>reset</Button>
+                                        <Button onClick={this.resetLexicon} disabled={interactionDisabled}>reset</Button>
                                         <Button onClick={this.saveLexicon} positive disabled={interactionDisabled}>save</Button>
                                     </Button.Group>
                                 </div>

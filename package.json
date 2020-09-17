@@ -7,6 +7,7 @@
     "array-sort": "^1.0.0",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
+    "cogo-toast": "^4.2.3",
     "downloadjs": "^1.4.7",
     "file-selector": "^0.1.6",
     "formik": "^1.5.1",
