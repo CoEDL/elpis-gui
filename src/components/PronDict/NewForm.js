@@ -86,7 +86,7 @@ class NewForm extends Component {
                                 <p className={"error-message"}>{error}</p>
                             }
                             <Button type="button" onClick={handleSubmit} disabled={datasets.length===0}>
-                                {t('common.addNewButton')}
+                                {t('common.nextButton')}
                             </Button>
                         </Form>
                     )}

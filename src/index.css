@@ -153,3 +153,4 @@ label.pad-right,
     max-height: 200px;
     overflow-y: scroll;
 }
+.ui.form .error { color: red }
