@@ -9,10 +9,12 @@ class CurrentEngineName extends Component {
     render() {
         const { t, engine_name } = this.props
 
+        let engines = {"kaldi": "Orthographic (Kaldi)"}
+
         const current = engine_name ?
         (
             <Message color='olive'>
-                { t('engine.common.currentEngineLabel') + engine_name }
+                { t('engine.common.currentEngineLabel') + engines[engine_name ]}
             </Message>
         ) : (
             <Message color='purple'>
