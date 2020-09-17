@@ -23,13 +23,12 @@ const engine = (state = initialEngineState, action) => {
 
 		case actionTypes.ENGINE_LOAD_SUCCESS:
 			selected_engine = action.response.data.data.engine;
-			console.log("engine reducer got engine", selected_engine)
 			if (!selected_engine) selected_engine = "espnet"
 			return { ...state, engine: selected_engine };
 
 		//	listen for model load, and set engine if not already selected
         case modelActionTypes.MODEL_LOAD_SUCCESS:
-        	console.log("MODEL_LOAD_SUCCESS", action.response.data.data.config)
+        	console.log("model load in engine reducer", action.response.data.data.config)
 			selected_engine = action.response.data.data.config.engine;
 			if (!selected_engine) selected_engine = "espnet"
 			return { ...state, engine: selected_engine };

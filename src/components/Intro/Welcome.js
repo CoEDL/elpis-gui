@@ -51,7 +51,7 @@ class StepWelcome extends Component {
 									fluid
 									className={"home-button"}
 									as={Link}
-									to={urls.gui.intro.choose_training_type}>
+									to={urls.gui.intro.choose_engine}>
 									Train
 								</Button>
 							</Grid.Column>

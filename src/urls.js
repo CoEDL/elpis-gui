@@ -2,7 +2,7 @@ export default {
     "gui": {
         "intro": {
             "home": "/",
-            "choose_training_type": "/training_type"
+            "choose_engine": "/choose-engine"
         },
         "engine": {
             "index": "/engine"

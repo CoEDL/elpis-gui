@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { Button, Image, Segment } from 'semantic-ui-react';
+import { Button, Confirm, Image, Segment } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 import elpisLogo from './elpis.png'
 import { connect } from 'react-redux';
 import { configReset } from 'redux/actions/configActions';
-import SelectEngine from 'components/Engine/SelectEngine'
+import 'react-semantic-toasts/styles/react-semantic-alert.css';
 
 class StepBranding extends Component {
+    state = { open: false }
+    open = () => this.setState({ open: true })
+    close = () => this.setState({ open: false })
 
     reset = () => {
         this.props.configReset()
@@ -21,7 +24,14 @@ class StepBranding extends Component {
                 </Link>
                 <div className={"right"}>
                     {/*<SelectEngine />*/}
-                    <Button basic onClick={this.reset}>reset</Button>
+                    <Button basic onClick={this.open}>Reset</Button>
+                    <Confirm
+                      open={this.state.open}
+                      content='Resetting will remove the uploaded files and any progress you have made. It will also deselect the engine.'
+                      onCancel={this.close}
+                      onConfirm={this.reset}
+                    />
+
                 </div>
             </Segment>
         )

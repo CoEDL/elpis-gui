@@ -6,7 +6,8 @@ import { Grid, Segment, Header, Button, Dropdown, Divider } from 'semantic-ui-re
 import Branding from 'components/Shared/Branding';
 import SideNav from 'components/Shared/SideNav';
 import CurrentEngineName from './CurrentEngineName'
-import SelectEngine from './SelectEngine'
+// import SelectEngine from './SelectEngine'
+import ChooseEngine from './ChooseEngine';
 
 import urls from 'urls';
 
@@ -27,15 +28,8 @@ const EngineDashboard = props => {
                     <CurrentEngineName />
 
                     <Segment>
-                        <SelectEngine />
+                        <ChooseEngine />
                     </Segment>
-
-                    <Button
-                        as={Link}
-                        to={urls.gui.dataset.index}
-                        disabled={!currentEngine}>
-                    {t('common.nextButton')}
-                    </Button>
 
                 </Grid.Column>
             </Grid>

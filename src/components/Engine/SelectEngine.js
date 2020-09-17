@@ -14,7 +14,8 @@ const SelectEngine = props => {
         engineLoad(postData);
     };
 
-    let options = list.map((name, i) => ({key: name, text: name, value: name}));
+    let engines = {"kaldi": "Orthographic"}
+    let options = list.map((name, i) => ({key: name, text: engines[name], value: name}));
 
     // If the engines list has not been populated, fetch the list and display a wait message.
     if (list.length === 0) {
