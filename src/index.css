@@ -131,6 +131,15 @@ label.pad-right,
     min-width: 8em;
 }
 
+.top-nav .right {
+    display: flex;
+    align-items: center
+}
+
+.top-nav .current-engine {
+    padding: 0 1em;
+}
+
 .ui.button.home-button {
     background: #e0e1e2 none;
     padding: 1em;
@@ -139,6 +148,7 @@ label.pad-right,
     font-size: 2em;
     font-weight: normal;
 }
+
 .ui.button.home-button:hover {
      background-color: #cacbcd;
 }
@@ -149,8 +159,14 @@ label.pad-right,
     border: 1px solid #aaa;
     padding: 1em;
 }
+
 .l2s-container {
     max-height: 200px;
     overflow-y: scroll;
 }
+
 .ui.form .error { color: red }
+
+.welcome-content .leader {
+  font-style: italic;
+}

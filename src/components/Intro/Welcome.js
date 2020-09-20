@@ -23,21 +23,24 @@ class StepWelcome extends Component {
 			<>
 				<Branding />
 
-				<Segment>
+				<Segment className="welcome-content">
 
+					<p className="leader">What is Elpis?</p>
 					<p>
-					Elpis is a speech-to-text transcription tool built with the purpose of accelerating the documentation of ‘low-resource’ languages. Elpis is designed for language workers and linguists who have no little or computational experience. With Elpis you can build a speech recognition (ASR) system, and use this to obtain orthographic and phonemic transcriptions.
+						Elpis brings cutting-edge speech recognition technology within reach of language workers and researchers who may not have backgrounds in speech engineering. With Elpis, we hope to enable more people to be able to use speech recognition tools to obtain transcriptions for speech.
 					</p>
 					<p>
-					The ASR systems that are built in Elpis are composed of language information including the sounds and words in a language, the ways those words are pronounced, and the probabilities of phone and word sequences.
+						Orthographic and phonemic transcriptions can be made with Elpis. Each type has particular requirements around what is needed to use Elpis.
 					</p>
 					<p>
-					Building your own ASR system works in stages. Each stage requires information about the language as input and produces an output. In the end, you have a system that can transcribe based on the system you’ve made.
+						For phonemic training, you will require some phonemically transcribed audio.
 					</p>
 					<p>
-					The orthographic and phonemic transcription services that Elpis offers require different sources of language information to build its ASR system.
+						Orthographic training requires audio with word level transcriptions, plus a "letter to sound" file which maps the characters in the orthography to pronunciation symbols.
 					</p>
-
+					<p>
+						For guidance using Elpis, including more information about the requirements, follow the <a href="https://elpis.readthedocs.io/en/latest/wiki/elpis-workshop.html" target="_blank">Elpis workshop steps</a>.
+					</p>
 
 					<Grid divided='vertically'>
 						<Grid.Row columns={2}>

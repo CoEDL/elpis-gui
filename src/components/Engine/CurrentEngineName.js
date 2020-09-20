@@ -9,7 +9,7 @@ class CurrentEngineName extends Component {
     render() {
         const { t, engine_name } = this.props
 
-        let engines = {"kaldi": "Orthographic (Kaldi)"}
+        let engines = {"kaldi": "Orthographic (Kaldi)", "espnet": "Phonemic (ESPnet)"}
 
         const current = engine_name ?
         (

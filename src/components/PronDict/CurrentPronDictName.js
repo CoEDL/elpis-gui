@@ -12,13 +12,13 @@ class CurrentPronDictName extends Component {
 
         const onDashboard = (match.url === urls.gui.pronDict.index) ? true : false
 
-        let engines = {"kaldi": "Orthographic (Kaldi)"}
+        let engines = {"kaldi": "Orthographic (Kaldi)", "espnet": "Phonemic (ESPnet)"}
 
         return (
             <>
                 {name &&
                 <Message color='olive'>
-                    { t('engine.common.currentEngineLabel') + engines[currentEngine ]}
+                    { t('engine.common.currentEngineLabel') + engines[currentEngine]}
                     <br />
                     { t('pronDict.common.currentPronDictLabel') + name }
                     <br />

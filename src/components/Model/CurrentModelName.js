@@ -12,13 +12,13 @@ class CurrentModelName extends Component {
 
         const onDashboard = (match.url === urls.gui.model.index) ? true : false
 
-        let engines = {"kaldi": "Orthographic (Kaldi)"}
+        let engines = {"kaldi": "Orthographic (Kaldi)", "espnet": "Phonemic (ESPnet)"}
 
         return (
             <>
                 {name &&
                 <Message color='olive'>
-                    { t('engine.common.currentEngineLabel') + engines[currentEngine ]}
+                    { t('engine.common.currentEngineLabel') + engines[currentEngine]}
                     <br />
                     { t('model.common.currentModelLabel') + name }
                     <br />

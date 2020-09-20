@@ -17,6 +17,10 @@ class StepBranding extends Component {
     }
 
     render() {
+        const { currentEngine } = this.props
+
+        let engines = {"kaldi": "Orthographic (Kaldi)", "espnet": "Phonemic (ESPnet)"}
+
         return (
             <Segment clearing as='h1' className="top-nav">
                 <Link to="/">
@@ -24,6 +28,7 @@ class StepBranding extends Component {
                 </Link>
                 <div className={"right"}>
                     {/*<SelectEngine />*/}
+                    <div className="current-engine">{engines[currentEngine]}</div>
                     <Button basic onClick={this.open}>Reset</Button>
                     <Confirm
                       open={this.state.open}
@@ -38,6 +43,12 @@ class StepBranding extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        currentEngine: state.engine.engine
+    }
+}
+
 const mapDispatchToProps = dispatch => ({
     configReset: postData => {
         dispatch(configReset(postData))
@@ -46,4 +57,4 @@ const mapDispatchToProps = dispatch => ({
     }
 })
 
-export default connect(null, mapDispatchToProps)(StepBranding)
+export default connect(mapStateToProps, mapDispatchToProps)(StepBranding)
