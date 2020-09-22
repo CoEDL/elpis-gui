@@ -49,6 +49,7 @@ const model = (state = initState, action) => {
 
         case actionTypes.MODEL_LIST_SUCCESS:
             var { list } = action.response.data.data
+            console.log("model reducer list got", list)
             return { ...state, modelList: list }
 
         case actionTypes.MODEL_SETTINGS_SUCCESS:
