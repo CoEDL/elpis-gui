@@ -99,6 +99,8 @@ class ModelDashboard extends Component {
             </Table>
         ) : <p>{ t('model.dashboard.noneMessage') }</p>
 
+        const where_to = (currentEngine === 'kaldi') ? urls.gui.model.settings : urls.gui.model.train
+
         return (
             <div>
                 <Branding />
@@ -137,7 +139,7 @@ class ModelDashboard extends Component {
                                             to={urls.gui.model.new}/>
                                     </Segment>
                                     {listEl}
-                                    <Button as={Link} to={urls.gui.model.settings} disabled={!name}>
+                                    <Button as={Link} to={where_to} disabled={!name}>
                                         {t('common.nextButton')}
                                     </Button>
                                 </>

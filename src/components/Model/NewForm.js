@@ -152,7 +152,10 @@ const mapDispatchToProps = dispatch => ({
                 return response
             })
             .then(response => {
-                history.push(urls.gui.model.settings)
+                console.log("response", response.data.config.engine)
+                const engine = response.data.config.engine
+                if (engine === "kaldi") history.push(urls.gui.model.settings)
+                if (engine === "espnet") history.push(urls.gui.model.train)
             })
             .catch(error => console.log("error", error))
     }
