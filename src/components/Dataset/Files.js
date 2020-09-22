@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from "react-router-dom";
-import { Button, Divider, Grid, Header, Icon, List, Message, Segment, Input, Form } from 'semantic-ui-react';
+import { Button, Divider, Grid, Header, Icon, List, Message, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { datasetSettings, datasetPrepare } from 'redux/actions/datasetActions';
@@ -70,6 +70,36 @@ class DatasetFiles extends Component {
         //     )
         // }
 
+        const fileList = 
+            <div className="file-list">
+                <Grid columns={3} divided>
+                    <Grid.Column>
+                        <Header size="tiny">
+                            Audio Files
+                        </Header>
+                        <List>
+                            {audioFileList}
+                        </List>
+                    </Grid.Column>
+                    <Grid.Column>
+                        <Header size="tiny">
+                            Transcription Files
+                        </Header>
+                        <List>
+                            {transcriptionFilesList}
+                        </List>
+                    </Grid.Column>
+                    <Grid.Column>
+                        <Header size="tiny">
+                            Additional Text Files
+                        </Header>
+                        <List>
+                            {additionalTextFilesList}
+                        </List>
+                    </Grid.Column>
+                </Grid>
+            </div>
+
         return (
             <div>
                 <Branding />
@@ -96,28 +126,10 @@ class DatasetFiles extends Component {
 
                                 {filesHeader &&
                                     <>
-                                    <Header as='h3'>
-                                        { filesHeader }
-                                    </Header>
-                                    <div className="file-list">
-                                        <Grid columns={3}>
-                                            <Grid.Column>
-                                                <List>
-                                                    {audioFileList}
-                                                </List>
-                                            </Grid.Column>
-                                            <Grid.Column>
-                                                <List>
-                                                    {transcriptionFilesList}
-                                                </List>
-                                            </Grid.Column>
-                                            <Grid.Column>
-                                                <List>
-                                                    {additionalTextFilesList}
-                                                </List>
-                                            </Grid.Column>
-                                        </Grid>
-                                    </div>
+                                        <Header as='h3'>
+                                            { filesHeader }
+                                        </Header>
+                                        { fileList }
                                     </>
                                 }
 

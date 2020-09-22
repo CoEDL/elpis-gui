@@ -53,6 +53,7 @@ const initialStepModelState = {
 			substeps: [
 				{ done: false, doing: false, enabled: false, title: "Recordings", path: urls.gui.dataset.index },
 				{ done: false, doing: false, enabled: false, title: "Files", path: urls.gui.dataset.files },
+				{ done: false, doing: false, enabled: false, title: "Visualise", path: urls.gui.dataset.visualise },
 				{ done: false, doing: false, enabled: false, title: "Wordlist", path: urls.gui.dataset.prepare }
 			],
 			engine_specific: null
@@ -109,6 +110,7 @@ const sideNav = (state = initialStepModelState, action) => {
 			action['url'] = state.lastURL;
 			// No return here!
 
+		// eslint-disable-next-line no-fallthrough
 		case actionTypes.APP_SET_CURRENT_STEP: {
 			let currentSubStepIndex = 0;
 			let currentStepName = null;

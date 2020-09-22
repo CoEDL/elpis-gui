@@ -7,6 +7,7 @@ import DatasetDashboard from './Dataset/Dashboard'
 import DatasetNew from './Dataset/New'
 import DatasetFiles from './Dataset/Files'
 import DatasetPrepare from './Dataset/Prepare'
+import DatasetVisualiser from './Dataset/Visualiser'
 import PronDictDashboard from './PronDict/Dashboard'
 import PronDictNew from './PronDict/New'
 import PronDictL2S from './PronDict/L2S'
@@ -35,6 +36,7 @@ class App extends Component {
                         <Route path={urls.gui.dataset.index} exact component={ DatasetDashboard } />
                         <Route path={urls.gui.dataset.new} component={ DatasetNew } />
                         <Route path={urls.gui.dataset.files} component={ DatasetFiles } />
+                        <Route path={urls.gui.dataset.visualise} component={ DatasetVisualiser } />
                         <Route path={urls.gui.dataset.prepare} exact component={ DatasetPrepare } />
 
                         <Route path={urls.gui.engine.index} exact component={SelectEngine} />

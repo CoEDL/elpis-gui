@@ -15,7 +15,6 @@ class DatasetPrepare extends Component {
     state = {
         column: null,
         reverse: false,
-        activeTab: 0
     }
 
     componentDidMount() {
@@ -38,20 +37,6 @@ class DatasetPrepare extends Component {
         }
     }
 
-    handleViewChange = (e) => this.setState({ activeTab: e.target.value })
-
-    handleTabChange = (e, { activeIndex }) => this.setState({ activeTab: activeIndex })
-
-    generateTickValues = (freqlist) => {
-        var yValues = freqlist.map(value => value.frequency);
-        var max = Math.max(...yValues);
-        if (max < 10) {
-            return max;
-        } else {
-            return 10;
-        }
-    }
-
     render() {
         const { t, additionalTextFiles, status, wordlist } = this.props
 
@@ -60,41 +45,6 @@ class DatasetPrepare extends Component {
         const { activeTab } = this.state
 
         const interactionDisabled = (this.props.name && wordlist.length > 0) ? false : true
-
-        const wordFreqGraph = (wordlist) =>
-            <div style={{ height: 500 }}>
-                <ResponsiveBar
-                    data={wordlist}
-                    keys={["frequency"]}
-                    indexBy="name"
-                    colors={"#D3A0F0"}
-                    colorBy="index"
-                    gridYValues={[1, 2, 3]}
-                    axisBottom={{
-                        tickSize: 5,
-                        tickPadding: 5,
-                        tickRotation: -45,
-                        legend: 'Word',
-                        legendPosition: 'middle',
-                        legendOffset: 50
-                    }}
-                    axisLeft={{
-                        tickSize: 5,
-                        tickPadding: 5,
-                        tickRotation: 0,
-                        tickValues: this.generateTickValues(wordlist),
-                        legend: 'Frequency',
-                        legendPosition: 'middle',
-                        legendOffset: -40
-                    }}
-                    margin={{
-                        "top": 50,
-                        "right": 50,
-                        "bottom": 80,
-                        "left": 60
-                    }}
-                />
-            </div>
 
         const wordFreqTable = (wordlist) =>
             <Table sortable celled fixed unstackable>
@@ -130,31 +80,11 @@ class DatasetPrepare extends Component {
                 </Table.Body>
             </Table>
 
-
-        const panes = (wordlist) => [
-            { menuItem: 'Table', render: () => <Tab.Pane>{wordFreqTable(wordlist)}</Tab.Pane> },
-            { menuItem: 'Graph', render: () => <Tab.Pane>{wordFreqGraph(wordlist)}</Tab.Pane> },
-        ]
-
         const listEl = wordlist.length > 0 ? (
             <>
                 <Grid>
                     <Grid.Column width={12}>
                         <h2>{t('dataset.prepare.header')}</h2>
-                    </Grid.Column>
-                    <Grid.Column width={4}>
-                        <Button.Group floated='right'>
-                            <Button
-                                onClick={this.handleViewChange}
-                                value={0}
-                                active={activeTab === 0}
-                            >Table</Button>
-                            <Button
-                                onClick={this.handleViewChange}
-                                value={1}
-                                active={activeTab === 1}
-                            >Graph</Button>
-                        </Button.Group>
                     </Grid.Column>
                 </Grid>
 
@@ -162,23 +92,7 @@ class DatasetPrepare extends Component {
                     <p>{t('dataset.prepare.description')}</p>
                 }
 
-                <div>
-                <Button.Group>
-                    <Button
-                        onClick={this.handleSort('name', wordlist)}
-                    >Alphbetical</Button>
-                    <Button
-                        onClick={this.handleSort('frequency', wordlist)}
-                    >Frequency</Button>
-                </Button.Group>
-                </div>
-
-                <Tab
-                    activeIndex={activeTab}
-                    menu={{ secondary: true, pointing: true }}
-                    panes={panes(wordlist)}
-                    onTabChange={this.handleTabChange}
-                />
+                { wordFreqTable(wordlist) }
 
             </>
         ) : null
@@ -214,7 +128,6 @@ class DatasetPrepare extends Component {
                                     </Button>
                                 </>
                             }
-
 
                         </Grid.Column>
                     </Grid>

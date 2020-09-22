@@ -50,6 +50,11 @@
             "ready": "Ready to process.",
             "preparing": "The files are being processed.",
             "noWords": "No words found, please upload some files or check your import settings."
+        },
+        "visualise": {
+            "title": "Dataset/Corpus Visualisation",
+            "overview": "Dataset Overview",
+            "overview_help": "This visualisation provides a highlevel view of the whole corpus/dataset."
         }
     },
     "engine": {
@@ -165,6 +170,7 @@
     "common": {
         "addNewButton": "Add New",
         "nextButton": "Next",
+        "skipButton": "Skip",
         "newButton": "New",
         "selectOneBelow": "Make a new one, or select one from the list below.",
         "choose": "Choose",

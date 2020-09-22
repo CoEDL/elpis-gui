@@ -4,9 +4,10 @@ export default {
             "index": "/dataset",
             "new": "/dataset/new",
             "files": "/dataset/files",
+            "visualise": "/dataset/visualise",
             "prepare": "/dataset/prepare",
             "prepareError": "/dataset/prepare/error",
-            "punctuation_to_explode_by": "/dataset/punctuation_to_explode_by"
+            "punctuation_to_explode_by": "/dataset/punctuation_to_explode_by",
         },
         "engine": {
             "index": "/engine"
