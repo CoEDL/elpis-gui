@@ -3,13 +3,12 @@ import { Link, withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { Message } from 'semantic-ui-react';
+import engines from "engines"
 
 class CurrentEngineName extends Component {
 
     render() {
         const { t, engine_name } = this.props
-
-        let engines = {"kaldi": "Orthographic (Kaldi)", "espnet": "Phonemic (ESPnet)"}
 
         const current = engine_name ?
         (

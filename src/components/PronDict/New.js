@@ -7,6 +7,7 @@ import { Message } from 'semantic-ui-react';
 import Branding from 'components/Shared/Branding';
 import SideNav from 'components/Shared/SideNav';
 import NewForm from 'components/PronDict/NewForm';
+import engines from "engines"
 
 
 class PronDictNew extends Component {
@@ -15,8 +16,6 @@ class PronDictNew extends Component {
 
     render() {
         const { t, currentEngine } = this.props;
-
-        let engines = {"kaldi": "Orthographic (Kaldi)", "espnet": "Phonemic (ESPnet)"}
 
         return (
             <div>

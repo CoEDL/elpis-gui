@@ -6,6 +6,7 @@ import { Message } from 'semantic-ui-react';
 import Branding from 'components/Shared/Branding';
 import SideNav from 'components/Shared/SideNav';
 import NewForm from 'components/Dataset/NewForm';
+import engines from "engines"
 
 
 class DatasetNew extends Component {
@@ -14,8 +15,6 @@ class DatasetNew extends Component {
 
     render() {
         const { t, currentEngine } = this.props;
-
-        let engines = {"kaldi": "Orthographic (Kaldi)", "espnet": "Phonemic (ESPnet)"}
 
         return (
             <div>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { Message } from 'semantic-ui-react';
 import urls from 'urls'
+import engines from "engines"
 
 class CurrentPronDictName extends Component {
 
@@ -11,8 +12,6 @@ class CurrentPronDictName extends Component {
         const { t, currentEngine, pronDictList, datasetName, name, match } = this.props
 
         const onDashboard = (match.url === urls.gui.pronDict.index) ? true : false
-
-        let engines = {"kaldi": "Orthographic (Kaldi)", "espnet": "Phonemic (ESPnet)"}
 
         return (
             <>

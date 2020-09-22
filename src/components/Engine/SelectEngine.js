@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { engineList, engineLoad } from 'redux/actions/engineActions';
 import { setCurrentStep } from 'redux/actions/sideNavActions'
+import engines from "engines"
 
 const SelectEngine = props => {
     let { t, currentEngine, list, engineList, engineLoad } = props;
@@ -14,7 +15,6 @@ const SelectEngine = props => {
         engineLoad(postData);
     };
 
-    let engines = {"kaldi": "Orthographic (Kaldi)", "espnet": "Phonemic (ESPnet)"}
     let options = list.map((name, i) => ({key: name, text: engines[name], value: name}));
 
     // If the engines list has not been populated, fetch the list and display a wait message.
@@ -27,7 +27,7 @@ const SelectEngine = props => {
         // Otherwise if list is populated, allow engine selections.
         return (
             <Dropdown
-                placeholder={currentEngine?currentEngine:"select engine"}
+                placeholder={currentEngine ? currentEngine : "select engine"}
                 selection
                 options={options}
                 value={currentEngine}

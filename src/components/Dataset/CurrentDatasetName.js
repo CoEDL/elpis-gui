@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { Message } from 'semantic-ui-react';
 import urls from 'urls'
+import engines from "engines"
 
 class CurrentDatasetName extends Component {
 
@@ -11,8 +12,6 @@ class CurrentDatasetName extends Component {
         const { t, currentEngine, name, datasetList, match } = this.props
 
         const onDashboard = (match.url === urls.gui.dataset.index) ? true : false
-
-        let engines = {"kaldi": "Orthographic (Kaldi)", "espnet": "Phonemic (ESPnet)"}
 
         return (
             <>
