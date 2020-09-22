@@ -18,7 +18,7 @@ class CurrentDatasetName extends Component {
             <>
                 {name &&
                 <Message color='olive'>
-                    { t('engine.common.currentEngineLabel') + engines[currentEngine]}
+                    { t('engine.common.currentEngineLabel') + engines[currentEngine] }
                     <br />
                     { t('dataset.common.currentDatasetLabel') + name }
                 </Message>

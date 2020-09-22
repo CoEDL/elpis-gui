@@ -18,7 +18,7 @@ class CurrentPronDictName extends Component {
             <>
                 {name &&
                 <Message color='olive'>
-                    { t('engine.common.currentEngineLabel') + engines[currentEngine]}
+                    { t('engine.common.currentEngineLabel') + engines[currentEngine] }
                     <br />
                     { t('pronDict.common.currentPronDictLabel') + name }
                     <br />

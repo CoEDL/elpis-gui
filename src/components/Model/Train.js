@@ -69,11 +69,13 @@ class ModelTrain extends Component {
 
                             {currentEngine && name &&
                             <>
-
-                                <Card fluid>
-                                    <Card.Content header={t('model.train.settingsHeader')}/>
-                                    <Card.Content description={t('model.settings.ngramLabel') + ' ' + settings.ngram}/>
-                                </Card>
+                                {currentEngine === "kaldi" &&
+                                    <Card fluid>
+                                        <Card.Content header={t('model.train.settingsHeader')}/>
+                                        <Card.Content
+                                            description={t('model.settings.ngramLabel') + ' ' + settings.ngram}/>
+                                    </Card>
+                                }
 
                                 <Message icon>
                                     {loadingIcon}

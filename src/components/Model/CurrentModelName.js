@@ -18,12 +18,16 @@ class CurrentModelName extends Component {
             <>
                 {name &&
                 <Message color='olive'>
-                    { t('engine.common.currentEngineLabel') + engines[currentEngine]}
+                    { t('engine.common.currentEngineLabel') + engines[currentEngine] }
                     <br />
                     { t('model.common.currentModelLabel') + name }
                     <br />
-                    { t('pronDict.common.currentPronDictLabel') + pronDictName }
-                    <br />
+                    {currentEngine ==='kaldi' &&
+                        <>
+                        { t('pronDict.common.currentPronDictLabel') + pronDictName }
+                        <br />
+                        </>
+                    }
                     {t('dataset.common.currentDatasetLabel') + datasetName }
                 </Message>
                 }

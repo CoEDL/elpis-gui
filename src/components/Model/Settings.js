@@ -38,7 +38,7 @@ class ModelSettings extends Component {
                               <p>{ t('model.common.noCurrentModelLabel') }</p>
                             }
 
-                            {currentEngine && name &&
+                            {currentEngine && currentEngine === 'kaldi' && name &&
                             <>
                                 <Message content={ t('model.settings.description') } />
                                 <Message attached content={ t('model.settings.ngramDescription') } />
@@ -75,7 +75,7 @@ class ModelSettings extends Component {
                                         isSubmitting,
                                         /* and other goodies */
                                     }) => (
-                                            <Form onSubmit={handleChange }>
+                                            <Form onSubmit={handleChange}>
                                                 <Field component="select" name="ngram">
                                                     <option key="1" value="1">1</option>
                                                     <option key="2" value="2">2</option>
@@ -86,12 +86,21 @@ class ModelSettings extends Component {
 
                                                 <Divider />
 
-                                                <Button type="button" onClick={handleSubmit} disabled={!name}>
+                                                <Button type="button" onClick={handleSubmit}>
                                                     { t('common.nextButton') }
                                                 </Button>
                                             </Form>
                                         ) }
                                 </Formik>
+                            </>
+                            }
+
+                            {currentEngine && currentEngine === 'espnet' && name &&
+                            <>
+                                <p>No settings for this engine</p>
+                                <Button type="button" onClick={()=>this.props.history.push(urls.gui.model.train)}>
+                                    { t('common.nextButton') }
+                                </Button>
                             </>
                             }
 
