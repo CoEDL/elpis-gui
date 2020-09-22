@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Grid, Header, Segment } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
+import { Message } from 'semantic-ui-react';
 import Branding from 'components/Shared/Branding';
 import SideNav from 'components/Shared/SideNav';
 import NewForm from 'components/Model/NewForm';
@@ -9,7 +11,10 @@ import NewForm from 'components/Model/NewForm';
 class ModelNew extends Component {
 
     render() {
-        const { t, name, modelNew } = this.props;
+        const { t, currentEngine } = this.props;
+
+        let engines = {"kaldi": "Orthographic (Kaldi)", "espnet": "Phonemic (ESPnet)"}
+
         return (
             <div>
                 <Branding />
@@ -24,6 +29,12 @@ class ModelNew extends Component {
                                 { t('model.new.title') }
                             </Header>
 
+                            {currentEngine &&
+                                <Message color='olive'>
+                                    { t('engine.common.currentEngineLabel') + engines[currentEngine] }
+                                </Message>
+                            }
+
                             <NewForm />
 
                         </Grid.Column>
@@ -34,5 +45,13 @@ class ModelNew extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        currentEngine: state.engine.engine
+    }
+}
 
-export default translate('common')(ModelNew)
+
+export default connect(mapStateToProps)(
+    translate('common')(ModelNew)
+)
