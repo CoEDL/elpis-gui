@@ -44,6 +44,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "cra-build-watch": "^1.4.1"
+    "cra-build-watch": "^3.2.0"
   }
 }
