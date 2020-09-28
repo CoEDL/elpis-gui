@@ -19,9 +19,16 @@ class DatasetOverviewSwarmplot extends Component {
             .then(res => res.json())
             .then(
                 (res) => {
+                    var tickValues = calculateTickValues(
+                        Math.min(...res.data.swarmplot.map(node => node.length)), 
+                        Math.max(...res.data.swarmplot.map(node => node.length)), 
+                        8);
                     this.setState({
                         dataLoaded: true,
-                        data: res.data
+                        data: res.data,
+                        tickValues: tickValues,
+                        min: Math.min(...tickValues),
+                        max: Math.max(...tickValues)
                     })
                 },
                 (error) => {
@@ -47,6 +54,9 @@ class DatasetOverviewSwarmplot extends Component {
             dataError,
             dataLoaded,
             data,
+            tickValues,
+            min,
+            max
         } = this.state;
 
         const plot =
@@ -64,17 +74,17 @@ class DatasetOverviewSwarmplot extends Component {
                             identity = "file"
                             label="file"
                             groups={["Files"]}
-                            size={[45, 65]}
+                            size={data.size}
                             colors={"#D3A0F0"}
                             spacing={5}
                             enableGridY={true}
                             enableGridX={false}
                             valueScale={{ 
                                 type: 'linear', 
-                                min: Math.min(...calculateTickValues(3.6, 10.5, 8)),
-                                max: Math.max(...calculateTickValues(3.6, 10.5, 8))
+                                min: min,
+                                max: max
                             }}
-                            gridYValues={calculateTickValues(3.6, 10.5, 8)}
+                            gridYValues={tickValues}
                             axisBottom={{
                                 tickSize: 5,
                                 tickPadding: 5,
@@ -87,7 +97,7 @@ class DatasetOverviewSwarmplot extends Component {
                                 tickSize: 5,
                                 tickPadding: 5,
                                 tickRotation: 0,
-                                tickValues: calculateTickValues(3.6, 10.5, 8),
+                                tickValues: tickValues,
                                 legend: 'Audio Length (seconds)',
                                 legendPosition: 'middle',
                                 legendOffset: -40

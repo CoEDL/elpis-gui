@@ -8,6 +8,7 @@ import CurrentDatasetName from "./CurrentDatasetName";
 import urls from 'urls';
 import DatasetOverviewSwarmplot from "components/Visualisations/DatasetOverviewSwarmplot"
 import WordFrequencyBar from "components/Visualisations/WordFrequencyBar"
+import SankeyWordOrder from 'components/Visualisations/SankeyWordOrder';
 
 class DatasetVisualiser extends Component {
 
@@ -29,7 +30,7 @@ class DatasetVisualiser extends Component {
             { menuItem: 'Dataset Overview - Swarmplot', render: () => <Tab.Pane>{<DatasetOverviewSwarmplot/>}</Tab.Pane> },
             { menuItem: 'File List - Custom', render: () => <Tab.Pane>{<WordFrequencyBar/>}</Tab.Pane> },
             { menuItem: 'Word Frequency - Bar', render: () => <Tab.Pane>{<WordFrequencyBar/>}</Tab.Pane> },
-            { menuItem: 'Word Order - Sankey', render: () => <Tab.Pane>{<WordFrequencyBar/>}</Tab.Pane> },
+            { menuItem: 'Word Order - Sankey', render: () => <Tab.Pane>{<SankeyWordOrder/>}</Tab.Pane> },
         ]
 
         return (

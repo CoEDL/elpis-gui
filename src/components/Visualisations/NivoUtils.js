@@ -1,9 +1,9 @@
 /**
  * Given a range, the calculateTickValues function returns appropriately
- * space integer values that can be used for the axes of a graph.
+ * spaced integer values that can be used for the axes of a graph.
  * 
  * The function automatically applies a 15% margin to the min and max
- * values supplied.
+ * values supplied to appropriately space the grap.
  * 
  * @param {*} min 
  * @param {*} max 
