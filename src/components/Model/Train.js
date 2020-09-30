@@ -102,6 +102,9 @@ class ModelTrain extends Component {
                                                 let icon = (status === "in-progress") ?
                                                     (<Icon name='circle notched' loading />) :
                                                     (<Icon name='dropdown' />)
+                                                let stage_status_icon = (status === "complete") ?
+                                                    (<Icon name='check' />) :
+                                                    ('')
 
                                                     return (
                                                         <div key={name}>
@@ -111,7 +114,7 @@ class ModelTrain extends Component {
                                                               onClick={() => this.selectAccordion(i)}
                                                             >
                                                                 {icon}
-                                                                {name} {status}
+                                                                {name} {stage_status_icon}
                                                             </Accordion.Title>
 
                                                             <Accordion.Content
