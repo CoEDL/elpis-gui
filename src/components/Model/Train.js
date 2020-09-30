@@ -11,21 +11,23 @@ import CurrentModelName from "./CurrentModelName";
 import urls from 'urls'
 
 class ModelTrain extends Component {
-
-    statusInterval = null
+    state = {
+        statusInterval: null,
+        activeIndex: null
+    }
 
     componentDidMount = () => {
     }
 
     handleModelTrain = () => {
         this.props.modelTrain()
-        this.statusInterval = this.props.setInterval(this.handleModelStatus, 1000)
+        this.setState({...this.state, statusInterval: this.props.setInterval(this.handleModelStatus, 1000)})
     }
 
     handleModelStatus = () => {
         const { status, modelStatus } = this.props;
         modelStatus()
-        if (status === 'trained') this.props.clearInterval(this.statusInterval)
+        if (status === 'trained') this.props.clearInterval(this.state.statusInterval)
     }
 
 
@@ -34,17 +36,17 @@ class ModelTrain extends Component {
     follow = () => {
     }
 
+    selectAccordion = i => {
+        this.setState({...this.state, activeIndex: i })
+        return
+    }
+
     render() {
         const { t, currentEngine, name, settings, status, stage_status } = this.props;
-
-        console.log("stage_status", stage_status)
 
         const loadingIcon = (status === 'training') ? (
             <Icon name='circle notched' loading  />
         ) : null
-
-        // This is for accordion
-        let activeIndex = 0
 
         return (
             <div>
@@ -82,7 +84,7 @@ class ModelTrain extends Component {
                                 <Message icon>
                                     {/*{loadingIcon}*/}
                                     <Message.Content>
-                                        <Message.Header>{status}</Message.Header>
+
                                         {stage_status &&
                                         <div className="stages">
                                             <Accordion
@@ -91,31 +93,38 @@ class ModelTrain extends Component {
                                             >
                                             {Object.keys(stage_status).map((stage, i) => {
 
+
                                                 let name = stage_status[stage]["name"]
                                                 let status = stage_status[stage]["status"]
                                                 let message = stage_status[stage]["message"]
-                                                let icon = (status=="in-progress") ?
+                                                let icon = (status === "in-progress") ?
                                                     (<Icon name='circle notched' loading />) :
                                                     (<Icon name='dropdown' />)
 
                                                     return (
-                                                        <>
+                                                        <div key={name}>
                                                             <Accordion.Title
                                                               index={i}
-                                                              // onClick={this.handleClick}
+                                                              active={this.state.activeIndex === i || status === "in-progress"}
+                                                              onClick={() => this.selectAccordion(i)}
                                                             >
                                                                 {icon}
                                                                 {name} {status}
                                                             </Accordion.Title>
 
-                                                            <Accordion.Content>
+                                                            <Accordion.Content active={this.state.activeIndex === i}>
                                                                 LOG
+                                                                {message}
                                                             </Accordion.Content>
-                                                        </>
+                                                        </div>
                                                     )
                                                 }
                                             )}
+
                                             </Accordion>
+
+                                            <p>{status}</p>
+
                                         </div>
                                         }
                                     </Message.Content>
