@@ -130,3 +130,12 @@ label.pad-right,
 .top-nav .ui.selection.dropdown {
     min-width: 8em;
 }
+
+.stages .ui.styled.accordion .content {
+    padding: 0 2em 2em 2em !important;
+}
+
+.accordion_log {
+    max-height: 400px;
+    overflow-y: scroll;
+}

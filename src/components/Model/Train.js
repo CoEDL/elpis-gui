@@ -88,6 +88,7 @@ class ModelTrain extends Component {
                                         {stage_status &&
                                         <div className="stages">
                                             <Accordion
+                                                fluid
                                                 styled
                                                 exclusive={false}
                                             >
@@ -97,6 +98,7 @@ class ModelTrain extends Component {
                                                 let name = stage_status[stage]["name"]
                                                 let status = stage_status[stage]["status"]
                                                 let message = stage_status[stage]["message"]
+                                                let log = stage_status[stage]["log"]
                                                 let icon = (status === "in-progress") ?
                                                     (<Icon name='circle notched' loading />) :
                                                     (<Icon name='dropdown' />)
@@ -112,9 +114,10 @@ class ModelTrain extends Component {
                                                                 {name} {status}
                                                             </Accordion.Title>
 
-                                                            <Accordion.Content active={this.state.activeIndex === i}>
-                                                                LOG
-                                                                {message}
+                                                            <Accordion.Content
+                                                                className="accordion_log"
+                                                                active={this.state.activeIndex === i}>
+                                                                {log}
                                                             </Accordion.Content>
                                                         </div>
                                                     )
