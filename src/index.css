@@ -139,3 +139,5 @@ label.pad-right,
     max-height: 400px;
     overflow-y: scroll;
 }
+
+.keep-line-breaks {white-space: pre-line;}

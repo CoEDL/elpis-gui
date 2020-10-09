@@ -18,10 +18,12 @@ function groupSettingsFromUI(ui) {
 }
 
 
-const GeneratedUI = ({settings, ui, changeSettingsCallback}) => {
+const GeneratedUI = ({props, settings, ui, changeSettingsCallback}) => {
     // console.group("GeneratedUI");
     // console.log({settings});
     // console.log({ui});
+
+    const { t } = props
 
     const forceUpdate = React.useState()[1].bind(null, {})  // see NOTE above
 
@@ -40,7 +42,7 @@ const GeneratedUI = ({settings, ui, changeSettingsCallback}) => {
 
     if (ui === null || ui === undefined) {
         // console.groupEnd();
-        return (<>No Settings.</>);
+        return (<>{t('generated-ui.no-settings')}.</>);
     }
 
     const handleStrChange = (ui_name, data) => {

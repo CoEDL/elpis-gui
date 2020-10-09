@@ -1,6 +1,11 @@
 {
     "welcome": {
-        "title": "Elpis"
+        "title": "ElpisTEST",
+        "description": "test \n new line"
+    },
+    "test": "TEST",
+    "generated-ui": {
+        "no-settings": "NO SETTINGS"
     },
     "engine": {
         "select": {

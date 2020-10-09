@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import { Grid, Button, Header, Container, Segment, Placeholder } from 'semantic-ui-react';
+import { Grid, Button, Header, Container, Segment, Placeholder,  Message } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import Branding from 'components/Shared/Branding';
@@ -23,6 +23,8 @@ class StepWelcome extends Component {
 					<Grid.Column>
 
 						<Segment>
+							<Message content={ t('dataset.files.description') } />
+							<div className="keep-line-breaks">{ t('dataset.files.description') }</div>
 
 							<p>
 								Elpis is a speech recognition tool, which you can use to transcribe audio.
