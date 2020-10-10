@@ -24,11 +24,11 @@ i18next.init({
 });
 
 ReactDOM.render(
+      <I18nextProvider i18n={i18next}>
       <Provider store={store}>
-          <I18nextProvider i18n={i18next}>
           <App />
-        </I18nextProvider>
-      </Provider>,
+      </Provider>
+    </I18nextProvider>,
     document.getElementById('root')
   );
 

@@ -1,9 +1,22 @@
 {
+    "sidenav": {
+        "engine" : "Engine",
+        "recordings" : "Recordings",
+        "files" : "Files",
+        "wordlist" : "Wordlist",
+        "pronunciation" : "Pronunciation",
+        "l2s" : "Letter to sound",
+        "dictionary" : "Dictionary",
+        "training" : "Training",
+        "settings" : "Settings",
+        "train" : "Train",
+        "results" : "Results",
+        "new-transcriptions" : "New transcriptions"
+    },
     "welcome": {
         "title": "ElpisTEST",
         "description": "test \n new line"
     },
-    "test": "TEST",
     "generated-ui": {
         "no-settings": "NO SETTINGS"
     },
