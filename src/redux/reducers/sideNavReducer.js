@@ -53,8 +53,8 @@ const initialStepModelState = {
 			substeps: [
 				{ done: false, doing: false, enabled: false, title: "Recordings", path: urls.gui.dataset.index },
 				{ done: false, doing: false, enabled: false, title: "Files", path: urls.gui.dataset.files },
+				{ done: false, doing: false, enabled: false, title: "Wordlist", path: urls.gui.dataset.prepare },
 				{ done: false, doing: false, enabled: false, title: "Visualise", path: urls.gui.dataset.visualise },
-				{ done: false, doing: false, enabled: false, title: "Wordlist", path: urls.gui.dataset.prepare }
 			],
 			engine_specific: null
 		},

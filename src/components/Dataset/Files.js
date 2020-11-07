@@ -16,7 +16,7 @@ class DatasetFiles extends Component {
     handleNextButton = () => {
         const { history, datasetPrepare} = this.props
         datasetPrepare(history)
-        history.push(urls.gui.dataset.prepare)
+        history.push(urls.gui.dataset.visualise)
     }
 
     render() {

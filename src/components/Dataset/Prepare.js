@@ -42,8 +42,6 @@ class DatasetPrepare extends Component {
 
         const { column, direction } = this.state
 
-        const { activeTab } = this.state
-
         const interactionDisabled = (this.props.name && wordlist.length > 0) ? false : true
 
         const wordFreqTable = (wordlist) =>
@@ -123,7 +121,7 @@ class DatasetPrepare extends Component {
                                 <>
                                     {listEl}
 
-                                    <Button as={Link} to={urls.gui.engine.index} disabled={interactionDisabled}>
+                                    <Button as={Link} to={urls.gui.dataset.visualise} disabled={interactionDisabled}>
                                         { t('common.nextButton') }
                                     </Button>
                                 </>

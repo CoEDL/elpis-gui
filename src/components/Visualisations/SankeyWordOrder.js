@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { ResponsiveSankey } from '@nivo/sankey';
-import { calculateTickValues } from './NivoUtils';
+import { Header, List } from 'semantic-ui-react';
 import urls from 'urls'
 
 class SankeyWordOrder extends Component {
@@ -13,8 +13,8 @@ class SankeyWordOrder extends Component {
         data: 0,
     }
 
-    fetchData = () => {
-        fetch(urls.api.statistics.sankeyWord)
+    fetchData = (url) => () => {
+        fetch(url)
             .then(res => res.json())
             .then(
                 (res) => {
@@ -35,10 +35,7 @@ class SankeyWordOrder extends Component {
     render() {
 
         const { 
-            t, 
-            additionalTextFiles, 
-            status, 
-            wordlist 
+            dataUrl
         } = this.props
 
         const {
@@ -53,7 +50,7 @@ class SankeyWordOrder extends Component {
                 <div>Error Loading Data: {dataError.message}</div>
             ) : (
                 !dataLoaded ? (
-                    this.fetchData
+                    this.fetchData(dataUrl)
                     (<div>Loading Data...</div>)
                 ) : (
                     (<div style={{ height: 500 }}>
@@ -72,7 +69,16 @@ class SankeyWordOrder extends Component {
 
             return (
             <div>
-                { plot }
+                <div>
+                    <Header as='h1'>Sankey Order Visualisation</Header>
+                    <p>This visualisation gives an overview of the ordering in the 
+                        corpus. Note that this is a trimmed dataset that only shows 
+                        the strongest links as the underlying utility does not support
+                        circular links. </p>
+                </div>
+                <div>
+                    { plot }
+                </div>
             </div>
         );
     }

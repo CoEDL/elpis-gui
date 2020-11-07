@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link, withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
 import { Grid, Segment, Header, Icon, Button, Tab } from 'semantic-ui-react';
@@ -7,30 +8,25 @@ import SideNav from 'components/Shared/SideNav';
 import CurrentDatasetName from "./CurrentDatasetName";
 import urls from 'urls';
 import DatasetOverviewSwarmplot from "components/Visualisations/DatasetOverviewSwarmplot"
-import WordFrequencyBar from "components/Visualisations/WordFrequencyBar"
+import FrequencyBar from "components/Visualisations/FrequencyBar"
 import SankeyWordOrder from 'components/Visualisations/SankeyWordOrder';
+import CustomFileList from 'components/Visualisations/CustomFileList';
 
 class DatasetVisualiser extends Component {
 
     handleViewChange = (e) => this.setState({ activeTab: e.target.value })
 
-    handleTabChange = (e, { activeIndex }) => this.setState({ activeTab: activeIndex })
+    handleTabChange = (_e, { activeIndex }) => this.setState({ activeTab: activeIndex })
     
-    handleNextButton = () => {
-        const { history, datasetPrepare} = this.props
-        datasetPrepare(history)
-        history.push(urls.gui.dataset.prepare)
-    }
-
     render() {
 
-        const { t, additionalTextFiles, status, wordlist } = this.props
+        const { t, status } = this.props
 
         const panes = [
             { menuItem: 'Dataset Overview - Swarmplot', render: () => <Tab.Pane>{<DatasetOverviewSwarmplot/>}</Tab.Pane> },
-            { menuItem: 'File List - Custom', render: () => <Tab.Pane>{<WordFrequencyBar/>}</Tab.Pane> },
-            { menuItem: 'Word Frequency - Bar', render: () => <Tab.Pane>{<WordFrequencyBar/>}</Tab.Pane> },
-            { menuItem: 'Word Order - Sankey', render: () => <Tab.Pane>{<SankeyWordOrder/>}</Tab.Pane> },
+            { menuItem: 'File List - Custom', render: () => <Tab.Pane>{<CustomFileList/>}</Tab.Pane> },
+            { menuItem: 'Word Frequency - Bar', render: () => <Tab.Pane>{<FrequencyBar dataUrl={urls.api.statistics.wordFreq}/>}</Tab.Pane> },
+            { menuItem: 'Word Order - Sankey', render: () => <Tab.Pane>{<SankeyWordOrder dataUrl={urls.api.statistics.sankeyWord}/>}</Tab.Pane> },
         ]
 
         return (
@@ -61,7 +57,7 @@ class DatasetVisualiser extends Component {
                             {status === 'wordlist-prepared' &&
                                 <>
                                     <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
-                                    <Button onClick={this.handleNextButton}>
+                                    <Button as={Link} to={urls.gui.engine.index}>
                                         { t('common.nextButton') }
                                     </Button>
                                 </>
@@ -83,4 +79,10 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(translate('common')(DatasetVisualiser))
+export default withRouter(
+    connect(
+        mapStateToProps,
+    )(
+        translate('common')(DatasetVisualiser)
+    )
+)

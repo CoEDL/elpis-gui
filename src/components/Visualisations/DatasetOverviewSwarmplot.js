@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { translate } from 'react-i18next';
-import { ResponsiveSwarmPlot } from '@nivo/swarmplot'
+import { ResponsiveSwarmPlot } from '@nivo/swarmplot';
+import { BasicTooltip } from '@nivo/tooltip';
+import { useTheme } from '@nivo/core';
 import { calculateTickValues } from './NivoUtils';
+import { Header, List } from 'semantic-ui-react';
+import CustomNode from './CustomFileNodeVisualisation'
 import urls from 'urls'
 
 class DatasetOverviewSwarmplot extends Component {
@@ -27,8 +31,10 @@ class DatasetOverviewSwarmplot extends Component {
                         dataLoaded: true,
                         data: res.data,
                         tickValues: tickValues,
-                        min: Math.min(...tickValues),
-                        max: Math.max(...tickValues)
+                        minLength: Math.min(...tickValues),
+                        maxLength: Math.max(...tickValues),
+                        minCount: Math.min(...res.data.swarmplot.map(node => node.count)),
+                        maxCount: Math.max(...res.data.swarmplot.map(node => node.count))
                     })
                 },
                 (error) => {
@@ -55,9 +61,30 @@ class DatasetOverviewSwarmplot extends Component {
             dataLoaded,
             data,
             tickValues,
-            min,
-            max
+            minLength,
+            maxLength,
+            minCount,
+            maxCount
         } = this.state;
+
+        const tooltipContent = ({ node }) => ( () => 
+            <div style={useTheme().tooltip.basic}>
+                <span>
+                    <strong>{node.id}</strong>
+                    <List value='-' size='tiny'>
+                        <List.Item><strong>{Number.parseFloat(node.data.length).toFixed(1)} mins</strong></List.Item>
+                        <List.Item><strong>{node.data.count} words</strong></List.Item>
+                        <List.Item><strong>{Number.parseFloat(node.data.annotated * 100).toFixed(1)} % annotated</strong></List.Item>
+                    </List>
+                </span>
+            </div>
+        )
+
+        const tooltip = (node) => (
+            <BasicTooltip
+                renderContent={tooltipContent(node)}
+            />
+        )
 
         const plot =
             dataError ? (
@@ -74,22 +101,26 @@ class DatasetOverviewSwarmplot extends Component {
                             identity = "file"
                             label="file"
                             groups={["Files"]}
-                            size={data.size}
+                            size={{
+                                key: "count",
+                                values: [minCount, maxCount],
+                                sizes: [55, 75]
+                            }}
                             colors={"#D3A0F0"}
-                            spacing={5}
+                            spacing={12}
                             enableGridY={true}
                             enableGridX={false}
                             valueScale={{ 
                                 type: 'linear', 
-                                min: min,
-                                max: max
+                                min: minLength,
+                                max: maxLength
                             }}
                             gridYValues={tickValues}
                             axisBottom={{
                                 tickSize: 5,
                                 tickPadding: 5,
                                 tickRotation: -45,
-                                legend: 'Word Count',
+                                legend: 'Each node represents a file with sizes relative to the number of annotated words.',
                                 legendPosition: 'middle',
                                 legendOffset: 50
                             }}
@@ -110,6 +141,8 @@ class DatasetOverviewSwarmplot extends Component {
                                 "bottom": 80,
                                 "left": 60
                             }}
+                            renderNode={props => <CustomNode {...props} />}
+                            tooltip={tooltip}
                         />
                     </div>)
                 )
@@ -117,7 +150,18 @@ class DatasetOverviewSwarmplot extends Component {
 
             return (
             <div>
-                { plot }
+                <div>
+                    <Header as='h1'>File List</Header>
+                    <p>This visualisation gives an overview of the file pairs in the dataset. You can hover over each blob to get the file name if the blob isn't labelled.</p>
+                    <List bulleted>
+                        <List.Item>Size: The number of annotated "words" in the file pair. Annotated "words" is the number of space separated "words" in the EAF file for the file pair.</List.Item>
+                        <List.Item>Vertical Position: Audio length of the file.</List.Item>
+                        <List.Item>Internal Pie/Arc: Percentage annotated.</List.Item>
+                    </List>
+                </div>
+                <div>
+                    { plot }
+                </div>
             </div>
         );
     }
