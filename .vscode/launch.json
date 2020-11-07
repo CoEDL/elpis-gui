@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Node: Elpis-Gui",
+            "type": "node",
+            "request": "launch",
+            "env": {
+                "NODE_ENV": "development",
+                "NODE_PATH": "src/",
+                "WDS_SOCKET_PORT": "3000"
+            },
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["start"],
+            "console": "integratedTerminal",
+        }
+    ]
+}
